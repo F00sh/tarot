@@ -1,0 +1,124 @@
+<template>
+  <div class="max-w-5xl mx-auto px-4 py-8">
+    <h1 class="text-2xl font-semibold">Single Card Draw</h1>
+    <p class="text-gray-300 mt-1">How many cards: 1 • Quick daily guidance or yes/no.</p>
+
+    <div class="mt-4 flex items-center gap-3">
+      <button @click="draw" class="px-4 py-2 rounded bg-yellow-500 text-black font-medium hover:bg-yellow-400">Draw</button>
+      <button @click="reset" class="px-4 py-2 rounded bg-gray-700 hover:bg-gray-600">Reset</button>
+    </div>
+
+    <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+      <component v-if="cards[0]" :is="getComponentFor(cards[0])" :reversed="cards[0].isReversed" />
+    </div>
+
+    <div v-if="cards.length" class="mt-8 p-4 rounded border border-gray-700 bg-black/10">
+      <h2 class="text-xl font-semibold">Interpretation (auto)</h2>
+      <div class="text-xs text-gray-400 mt-1">
+        <ClientOnly>
+          <template #default>
+            <span v-if="isLocal">Local model<span v-if="llmState?.loading">: loading…</span><span v-else-if="llmState?.error">: error — {{ llmState.error }}</span><span v-else>: ready</span></span>
+            <span v-else>Server AI</span>
+          </template>
+        </ClientOnly>
+      </div>
+      <div class="mt-2 text-gray-300 whitespace-pre-wrap" v-if="explanation && !explanationLoading">{{ explanation }}</div>
+      <div class="mt-2 text-gray-400" v-else>Thinking...</div>
+      <div class="mt-3">
+        <button @click="generateExplanation" class="px-3 py-1.5 rounded bg-gray-700 hover:bg-gray-600">Regenerate</button>
+      </div>
+    </div>
+
+    <div v-if="cards.length" class="mt-6 p-4 rounded border border-gray-700 bg-black/20">
+      <h2 class="text-xl font-semibold">Ask About Your Card</h2>
+      <textarea v-model="question" rows="3" class="mt-3 w-full px-3 py-2 rounded bg-gray-900 border border-gray-700" placeholder="What guidance do I need today?"></textarea>
+      <div class="mt-3 flex items-center gap-3">
+        <button :disabled="loading || !question.trim()" @click="ask" class="px-4 py-2 rounded bg-emerald-500 text-black font-medium disabled:opacity-50 hover:bg-emerald-400">Ask</button>
+        <span v-if="loading" class="text-sm text-gray-400">Thinking...</span>
+      </div>
+
+      <div v-if="messages.length" class="mt-6 space-y-4">
+        <div v-for="(m, i) in messages" :key="i" class="p-3 rounded bg-gray-800/60">
+          <div class="text-xs text-gray-400 mb-1">{{ m.role === 'user' ? 'You' : 'GPT' }}</div>
+          <div class="whitespace-pre-wrap">{{ m.content }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { useDeck } from '@/composables/useDeck'
+import { useAI } from '@/composables/useAI'
+
+const { createDeck, shuffleDeck, deal, getComponentFor } = useDeck()
+const { interpret, isLocal, localState: llmState } = useAI()
+const cards = ref<any[]>([])
+
+function draw() {
+  createDeck()
+  shuffleDeck()
+  cards.value = deal(1)
+  generateExplanation()
+}
+function reset() {
+  cards.value = []
+  createDeck()
+}
+
+type Msg = { role: 'user' | 'assistant'; content: string }
+const messages = ref<Msg[]>([])
+const question = ref('')
+const loading = ref(false)
+
+const explanation = ref('')
+const explanationLoading = ref(false)
+async function generateExplanation() {
+  if (!cards.value.length) return
+  explanationLoading.value = true
+  try {
+    const payload = {
+      question: 'Provide a brief high-level overview of this single card draw.',
+      spread: 'Single Card Draw',
+      brief: true,
+      cards: cards.value.map(c => ({
+        position: 'Focus',
+        name: c.name,
+        orientation: c.isReversed ? 'reversed' : 'upright',
+        uprightKeywords: c.uprightKeywords,
+        reversedKeywords: c.reversedKeywords
+      }))
+    }
+    explanation.value = await interpret(payload)
+  } catch (e: any) {
+    explanation.value = e?.data?.text || 'Sorry, could not generate an overview.'
+  } finally {
+    explanationLoading.value = false
+  }
+}
+
+async function ask() {
+  if (!cards.value.length) return
+  loading.value = true
+  messages.value.push({ role: 'user', content: question.value })
+  try {
+    const payload = {
+      question: question.value,
+      spread: 'Single Card Draw',
+      cards: cards.value.map((c, idx) => ({
+        position: 'Focus',
+        name: c.name,
+        orientation: c.isReversed ? 'reversed' : 'upright',
+        uprightKeywords: c.uprightKeywords,
+        reversedKeywords: c.reversedKeywords
+      }))
+    }
+    const text = await interpret(payload)
+    messages.value.push({ role: 'assistant', content: text })
+    question.value = ''
+  } catch (e) {
+    messages.value.push({ role: 'assistant', content: 'Sorry, I could not fetch an interpretation.' })
+  } finally { loading.value = false }
+}
+</script>
+
