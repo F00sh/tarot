@@ -27,7 +27,7 @@
           class="group focus:outline-none flex flex-col items-center"
           @click="openCard(c)"
         >
-          <CardBySlug :slug="c.slug" size="sm" :clear="true" />
+          <CardBySlug :slug="c.slug" size="sm" :clear="true" :interactive="false" />
           <div class="mt-1 text-xs text-gray-300 text-center">{{ c.name }}</div>
         </button>
       </div>
@@ -43,7 +43,7 @@
           class="group focus:outline-none flex flex-col items-center"
           @click="openCard(c)"
         >
-          <CardBySlug :slug="c.slug" size="sm" :clear="true" />
+          <CardBySlug :slug="c.slug" size="sm" :clear="true" :interactive="false" />
           <div class="mt-1 text-xs text-gray-300 text-center">{{ c.name }}</div>
         </button>
       </div>

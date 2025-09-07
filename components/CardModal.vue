@@ -30,6 +30,7 @@
     </div>
   </div>
   
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -38,4 +39,29 @@ import type { CardInfo } from '@/data/cards'
 
 const props = defineProps<{ open: boolean; card?: CardInfo | null }>()
 const emit = defineEmits<{ (e: 'close'): void; (e: 'prev'): void; (e: 'next'): void }>()
+
+// Disable background scroll when open
+if (process.client) {
+  watch(
+    () => props.open,
+    (val) => {
+      const el = document.documentElement
+      const body = document.body
+      if (val) {
+        el.style.overflow = 'hidden'
+        body.style.overflow = 'hidden'
+      } else {
+        el.style.overflow = ''
+        body.style.overflow = ''
+      }
+    },
+    { immediate: true }
+  )
+  onBeforeUnmount(() => {
+    const el = document.documentElement
+    const body = document.body
+    el.style.overflow = ''
+    body.style.overflow = ''
+  })
+}
 </script>

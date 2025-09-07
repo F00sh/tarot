@@ -8,17 +8,10 @@
       <button @click="reset" class="px-4 py-2 rounded bg-gray-700 hover:bg-gray-600">Reset</button>
     </div>
 
-    <!-- Mobile: simple grid fallback -->
-    <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-6 md:hidden">
-      <div v-for="(c, i) in cards" :key="'m-' + i" class="flex flex-col items-center">
-        <div class="text-xs text-gray-400 mb-2 text-center">{{ positions[i] }}</div>
-        <component v-if="c" :is="getComponentFor(c)" :reversed="c.isReversed" />
-      </div>
-    </div>
-
-    <!-- Desktop: relationship composition -->
-    <div class="mt-6 hidden md:block">
-      <div class="relative mx-auto" style="width: 900px; height: 420px;">
+    <!-- Scaled relationship composition, fits viewport -->
+    <div class="mt-6" style="height: min(60vh, 600px);">
+      <SpreadScaler :width="900" :height="420">
+      <div class="relative" style="width: 900px; height: 420px;">
         <!-- Row 1: You (left), Relationship Now (center), Them (right) -->
         <div class="absolute" style="left: 80px; top: 20px;">
           <div class="text-xs text-gray-400 mb-1 text-center">1. {{ positions[0] }}</div>
@@ -49,6 +42,7 @@
           <component v-if="cards[5]" :is="getComponentFor(cards[5])" :reversed="cards[5].isReversed" />
         </div>
       </div>
+      </SpreadScaler>
     </div>
 
     
@@ -63,6 +57,7 @@ import { provide } from 'vue'
 import { useDeck } from '@/composables/useDeck'
 import PromptPanel from '@/components/PromptPanel.vue'
 import BottomDock from '@/components/BottomDock.vue'
+import SpreadScaler from '@/components/SpreadScaler.vue'
 const { createDeck, shuffleDeck, deal, getComponentFor } = useDeck()
 const positions = ['You','Them','Relationship Now','Challenges','Strengths','Future Potential']
 const cards = ref<any[]>([])

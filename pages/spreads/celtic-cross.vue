@@ -8,17 +8,10 @@
       <button @click="reset" class="px-4 py-2 rounded bg-gray-700 hover:bg-gray-600">Reset</button>
     </div>
 
-    <!-- Mobile: simple grid fallback -->
-    <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-6 md:hidden">
-      <div v-for="(c, i) in cards" :key="'m-' + i" class="flex flex-col items-center">
-        <div class="text-xs text-gray-400 mb-2 text-center">{{ i + 1 }}. {{ positions[i] }}</div>
-        <component v-if="c" :is="getComponentFor(c)" :reversed="c.isReversed" />
-      </div>
-    </div>
-
-    <!-- Desktop: realistic Celtic Cross layout -->
-    <div class="mt-6 hidden md:block">
-      <div class="relative mx-auto" style="width: 900px; height: 520px;">
+    <!-- Scaled realistic Celtic Cross layout, fits viewport -->
+    <div class="mt-6" style="height: min(65vh, 700px);">
+      <SpreadScaler :width="900" :height="520">
+      <div class="relative" style="width: 900px; height: 520px;">
         <!-- Cross center (1) -->
         <div class="absolute" style="left: 260px; top: 160px;">
           <div class="text-xs text-gray-400 mb-1 text-center">1. {{ positions[0] }}</div>
@@ -69,6 +62,7 @@
           <component v-if="cards[9]" :is="getComponentFor(cards[9])" :reversed="cards[9].isReversed" />
         </div>
       </div>
+      </SpreadScaler>
     </div>
 
     
@@ -83,6 +77,7 @@ import { provide } from 'vue'
 import { useDeck } from '@/composables/useDeck'
 import PromptPanel from '@/components/PromptPanel.vue'
 import BottomDock from '@/components/BottomDock.vue'
+import SpreadScaler from '@/components/SpreadScaler.vue'
 const { createDeck, shuffleDeck, deal, getComponentFor } = useDeck()
 const positions = [
   'Present','Challenge','Past','Future','Above','Below','Advice','External Influences','Hopes / Fears','Outcome'

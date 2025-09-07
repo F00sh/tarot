@@ -26,8 +26,17 @@
       <div class="mt-auto" />
     </div>
 
-    <!-- Dark overlay when open in clear mode -->
-    <div v-if="overlayOpen && isClear" class="absolute inset-0 bg-black/60" />
+    <!-- Dark overlay when open -->
+    <div v-if="overlayOpen" class="absolute inset-0 bg-black/60" />
+
+    <!-- Close button when overlay open -->
+    <button
+      v-if="overlayOpen"
+      class="absolute top-2 right-2 z-10 px-2 py-1 text-xs rounded border border-purple-900/60 bg-black/40 hover:bg-black/60"
+      @click.stop="overlayOpen = false"
+    >
+      Close
+    </button>
 
     <!-- Bottom footer: name + orientation (only when overlay open) -->
     <div v-if="overlayOpen" class="absolute bottom-0 inset-x-0 bg-black/60 text-gray-200 text-xs px-2 py-1 flex items-center justify-between">
@@ -48,6 +57,7 @@ const props = defineProps<{
   imageSrc?: string | null
   imageBase?: string | null
   clear?: boolean
+  interactive?: boolean
 }>()
 
 const isReversed = computed(() => !!props.reversed)
@@ -69,11 +79,8 @@ const isClear = computed(() => props.clear ?? providedClear)
 const overlayOpen = ref(false)
 const bringToFront = computed(() => overlayOpen.value)
 function toggleOverlay() {
-  if (isClear.value) {
-    overlayOpen.value = !overlayOpen.value
-  } else {
-    overlayOpen.value = !overlayOpen.value
-  }
+  if (props.interactive === false) return
+  overlayOpen.value = !overlayOpen.value
 }
 
 const imgError = ref(false)

@@ -11,5 +11,9 @@
 
 <style>
 @import '@/assets/css/tailwind.css';
+html, body {
+  background-color: #0a0910; /* tarot.bg */
+  min-height: 100%;
+  overflow-x: hidden;
+}
 </style>
-
