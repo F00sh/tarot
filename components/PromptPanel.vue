@@ -1,8 +1,8 @@
 <template>
-  <div class="mt-6 p-3 rounded border border-purple-900/60 bg-black/40">
-    <div class="flex items-center justify-between">
+  <div class="mt-3 p-2 sm:p-3 rounded border border-purple-900/60 bg-black/40 w-full">
+    <div class="flex flex-wrap items-center justify-between gap-2">
       <h2 class="text-base font-semibold text-gray-200">ChatGPT Prompt</h2>
-      <div class="flex items-center gap-2">
+      <div class="flex flex-wrap items-center gap-2">
         <button @click="copyPrompt" class="px-2 py-1 rounded bg-emerald-500 text-black text-xs font-medium hover:bg-emerald-400">Copy</button>
         <button @click="openChatGPT" class="px-2 py-1 rounded bg-tarot-accent text-white text-xs font-medium hover:opacity-90">Open</button>
         <span v-if="copied" class="text-[11px] text-gray-400">Copied!</span>
@@ -10,9 +10,9 @@
       </div>
     </div>
 
-    <div v-show="!collapsed" class="mt-3 space-y-2">
+    <div v-show="!collapsed" class="mt-2 grid grid-cols-1 gap-2">
       <textarea v-model="question" rows="2" class="w-full px-2 py-1.5 rounded bg-black/60 border border-purple-900/60 text-gray-200 placeholder:text-gray-500 text-sm" :placeholder="placeholder"></textarea>
-      <textarea :value="prompt" readonly rows="5" class="w-full px-2 py-1.5 rounded bg-black/60 border border-purple-900/60 font-mono text-[11px] text-gray-200"></textarea>
+      <textarea :value="prompt" readonly rows="4" class="w-full px-2 py-1.5 rounded bg-black/60 border border-purple-900/60 font-mono text-[11px] text-gray-200 whitespace-pre-wrap break-words max-h-40 overflow-auto"></textarea>
     </div>
   </div>
 </template>
