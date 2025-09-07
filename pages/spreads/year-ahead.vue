@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-7xl mx-auto px-4 py-8">
+  <div class="max-w-7xl mx-auto px-4 py-8 pb-64">
     <h1 class="text-2xl font-semibold">Year Ahead</h1>
     <p class="text-gray-300 mt-1">How many cards: 12 • One for each month.</p>
 
@@ -15,13 +15,17 @@
       </div>
     </div>
 
-    <PromptPanel v-if="cards.length === 12" :cards="promptCards" :positions="months" spread="Year Ahead" placeholder="What themes define my upcoming year?" />
+    
   </div>
+  <BottomDock v-if="cards.length === 12">
+    <PromptPanel :cards="promptCards" :positions="months" spread="Year Ahead" placeholder="What themes define my upcoming year?" />
+  </BottomDock>
 </template>
 
 <script setup lang="ts">
 import { useDeck } from '@/composables/useDeck'
 import PromptPanel from '@/components/PromptPanel.vue'
+import BottomDock from '@/components/BottomDock.vue'
 const { createDeck, shuffleDeck, deal, getComponentFor } = useDeck()
 const months = ['January','February','March','April','May','June','July','August','September','October','November','December']
 const cards = ref<any[]>([])

@@ -6,6 +6,7 @@
       <div class="mt-6 flex gap-3">
         <NuxtLink to="/deck" class="inline-flex items-center gap-2 px-4 py-2 rounded bg-yellow-500 text-black font-medium hover:bg-yellow-400 transition">Open Free Deck</NuxtLink>
         <NuxtLink to="/spreads" class="inline-flex items-center gap-2 px-4 py-2 rounded bg-indigo-500 text-white font-medium hover:bg-indigo-400 transition">Browse Spreads</NuxtLink>
+        <NuxtLink to="/info" class="inline-flex items-center gap-2 px-4 py-2 rounded bg-tarot-accent text-white font-medium hover:opacity-90 transition">Info</NuxtLink>
       </div>
     </section>
 

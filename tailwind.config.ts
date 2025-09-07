@@ -13,13 +13,12 @@ export default {
     extend: {
       colors: {
         tarot: {
-          bg: '#0b0f19',
-          card: '#111827',
-          accent: '#eab308'
+          bg: '#0a0910',
+          card: '#130a1f',
+          accent: '#7c3aed' // deep violet accent
         }
       }
     }
   },
   plugins: []
 } satisfies Config
-

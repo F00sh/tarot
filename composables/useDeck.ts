@@ -1,4 +1,4 @@
-import { cards, bySlug, type CardInfo } from '@/data/cards'
+import { cards, type CardInfo } from '@/data/cards'
 
 export type DeckCard = CardInfo & {
   id: number
@@ -71,11 +71,6 @@ export const useDeck = () => {
     return Comp
   }
 
-  function getCardData(slug: string) {
-    const info = bySlug(slug)
-    if (!info) throw new Error(`Unknown card slug: ${slug}`)
-    return info
-  }
 
   // initialize deck on first use
   if (deck.value.length === 0) createDeck()
@@ -87,14 +82,9 @@ export const useDeck = () => {
     shuffleDeck,
     cutDeck,
     deal,
-    getComponentFor,
-    getCardData
+    getComponentFor
   }
 }
 
-// Make getCardData usable via #imports for card components
-export function getCardData(slug: string) {
-  const info = bySlug(slug)
-  if (!info) throw new Error(`Unknown card slug: ${slug}`)
-  return info
-}
+// Back-compat: re-export getCardData for any imports from useDeck
+export { getCardData } from './useCards'

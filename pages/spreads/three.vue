@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-6xl mx-auto px-4 py-8">
+  <div class="max-w-6xl mx-auto px-4 py-8 pb-64">
     <h1 class="text-2xl font-semibold">Three-Card Spread</h1>
     <p class="text-gray-300 mt-1">How many cards: 3 • Positions: Past • Present • Future.</p>
 
@@ -15,13 +15,17 @@
       </div>
     </div>
 
-    <PromptPanel v-if="cards.length === 3" :cards="promptCards" :positions="positions" spread="Three-Card (Past-Present-Future)" placeholder="What is the situation and how does it evolve?" />
+    
   </div>
+  <BottomDock v-if="cards.length === 3">
+    <PromptPanel :cards="promptCards" :positions="positions" spread="Three-Card (Past-Present-Future)" placeholder="What is the situation and how does it evolve?" />
+  </BottomDock>
 </template>
 
 <script setup lang="ts">
 import { useDeck } from '@/composables/useDeck'
 import PromptPanel from '@/components/PromptPanel.vue'
+import BottomDock from '@/components/BottomDock.vue'
 const { createDeck, shuffleDeck, deal, getComponentFor } = useDeck()
 const positions = ['Past', 'Present', 'Future']
 const cards = ref<any[]>([])

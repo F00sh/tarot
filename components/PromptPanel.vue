@@ -1,22 +1,18 @@
 <template>
-  <div class="mt-8 p-4 rounded border border-gray-700 bg-black/20">
-    <h2 class="text-xl font-semibold">Chat with ChatGPT</h2>
-    <p class="text-sm text-gray-400 mt-1">We’ll generate a concise prompt with your cards. Click Copy then Open ChatGPT and paste.</p>
-
-    <div class="mt-4 space-y-3">
-      <label class="text-sm text-gray-300">Optional question</label>
-      <textarea v-model="question" rows="3" class="w-full px-3 py-2 rounded bg-gray-900 border border-gray-700" :placeholder="placeholder"></textarea>
-
-      <div class="flex flex-wrap items-center gap-3">
-        <button @click="copyPrompt" class="px-3 py-1.5 rounded bg-emerald-500 text-black font-medium hover:bg-emerald-400">Copy Prompt</button>
-        <button @click="openChatGPT" class="px-3 py-1.5 rounded bg-indigo-500 text-white font-medium hover:bg-indigo-400">Open ChatGPT</button>
-        <span v-if="copied" class="text-xs text-gray-400">Copied!</span>
+  <div class="mt-6 p-3 rounded border border-purple-900/60 bg-black/40">
+    <div class="flex items-center justify-between">
+      <h2 class="text-base font-semibold text-gray-200">ChatGPT Prompt</h2>
+      <div class="flex items-center gap-2">
+        <button @click="copyPrompt" class="px-2 py-1 rounded bg-emerald-500 text-black text-xs font-medium hover:bg-emerald-400">Copy</button>
+        <button @click="openChatGPT" class="px-2 py-1 rounded bg-tarot-accent text-white text-xs font-medium hover:opacity-90">Open</button>
+        <span v-if="copied" class="text-[11px] text-gray-400">Copied!</span>
+        <button @click="collapsed = !collapsed" class="px-2 py-1 rounded border border-purple-900/60 text-xs text-gray-200 hover:bg-purple-900/20">{{ collapsed ? 'Show' : 'Hide' }}</button>
       </div>
+    </div>
 
-      <div>
-        <label class="text-sm text-gray-300">Generated prompt</label>
-        <textarea :value="prompt" readonly rows="8" class="mt-1 w-full px-3 py-2 rounded bg-gray-900 border border-gray-700 font-mono text-xs"></textarea>
-      </div>
+    <div v-show="!collapsed" class="mt-3 space-y-2">
+      <textarea v-model="question" rows="2" class="w-full px-2 py-1.5 rounded bg-black/60 border border-purple-900/60 text-gray-200 placeholder:text-gray-500 text-sm" :placeholder="placeholder"></textarea>
+      <textarea :value="prompt" readonly rows="5" class="w-full px-2 py-1.5 rounded bg-black/60 border border-purple-900/60 font-mono text-[11px] text-gray-200"></textarea>
     </div>
   </div>
 </template>
@@ -38,6 +34,7 @@ const props = defineProps<{
 
 const question = ref('')
 const copied = ref(false)
+const collapsed = ref(true)
 
 const prompt = computed(() => {
   const lines: string[] = []

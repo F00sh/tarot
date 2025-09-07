@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-6xl mx-auto px-4 py-8">
+  <div class="max-w-6xl mx-auto px-4 py-8 pb-64">
     <h1 class="text-3xl font-semibold mb-6">Tarot Deck</h1>
 
     <div class="flex flex-wrap items-center gap-3">
@@ -22,14 +22,18 @@
       />
     </div>
 
-    <PromptPanel v-if="dealt.length" :cards="promptCards" spread="Free Draw" />
+    
   </div>
+  <BottomDock v-if="dealt.length">
+    <PromptPanel :cards="promptCards" spread="Free Draw" />
+  </BottomDock>
   
 </template>
 
 <script setup lang="ts">
 import { useDeck } from '@/composables/useDeck'
 import PromptPanel from '@/components/PromptPanel.vue'
+import BottomDock from '@/components/BottomDock.vue'
 
 const { dealt, shuffleDeck, cutDeck, deal, createDeck, getComponentFor } = useDeck()
 

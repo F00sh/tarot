@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-6xl mx-auto px-4 py-8">
+  <div class="max-w-6xl mx-auto px-4 py-8 pb-64">
     <h1 class="text-2xl font-semibold">Relationship Spread</h1>
     <p class="text-gray-300 mt-1">How many cards: 6 • You • Them • Relationship now • Challenges • Strengths • Future potential.</p>
 
@@ -8,20 +8,60 @@
       <button @click="reset" class="px-4 py-2 rounded bg-gray-700 hover:bg-gray-600">Reset</button>
     </div>
 
-    <div class="mt-6 grid sm:grid-cols-3 md:grid-cols-6 gap-6">
-      <div v-for="(c, i) in cards" :key="i" class="flex flex-col items-center">
+    <!-- Mobile: simple grid fallback -->
+    <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-6 md:hidden">
+      <div v-for="(c, i) in cards" :key="'m-' + i" class="flex flex-col items-center">
         <div class="text-xs text-gray-400 mb-2 text-center">{{ positions[i] }}</div>
         <component v-if="c" :is="getComponentFor(c)" :reversed="c.isReversed" />
       </div>
     </div>
 
-    <PromptPanel v-if="cards.length === 6" :cards="promptCards" :positions="positions" spread="Relationship" placeholder="What should I understand about this relationship?" />
+    <!-- Desktop: relationship composition -->
+    <div class="mt-6 hidden md:block">
+      <div class="relative mx-auto" style="width: 900px; height: 420px;">
+        <!-- Row 1: You (left), Relationship Now (center), Them (right) -->
+        <div class="absolute" style="left: 80px; top: 20px;">
+          <div class="text-xs text-gray-400 mb-1 text-center">1. {{ positions[0] }}</div>
+          <component v-if="cards[0]" :is="getComponentFor(cards[0])" :reversed="cards[0].isReversed" />
+        </div>
+        <div class="absolute" style="left: 360px; top: 20px;">
+          <div class="text-xs text-gray-400 mb-1 text-center">3. {{ positions[2] }}</div>
+          <component v-if="cards[2]" :is="getComponentFor(cards[2])" :reversed="cards[2].isReversed" />
+        </div>
+        <div class="absolute" style="left: 640px; top: 20px;">
+          <div class="text-xs text-gray-400 mb-1 text-center">2. {{ positions[1] }}</div>
+          <component v-if="cards[1]" :is="getComponentFor(cards[1])" :reversed="cards[1].isReversed" />
+        </div>
+
+        <!-- Row 2: Challenges (left), Strengths (right) -->
+        <div class="absolute" style="left: 220px; top: 220px;">
+          <div class="text-xs text-gray-400 mb-1 text-center">4. {{ positions[3] }}</div>
+          <component v-if="cards[3]" :is="getComponentFor(cards[3])" :reversed="cards[3].isReversed" />
+        </div>
+        <div class="absolute" style="left: 500px; top: 220px;">
+          <div class="text-xs text-gray-400 mb-1 text-center">5. {{ positions[4] }}</div>
+          <component v-if="cards[4]" :is="getComponentFor(cards[4])" :reversed="cards[4].isReversed" />
+        </div>
+
+        <!-- Bottom center: Future Potential (6) -->
+        <div class="absolute" style="left: 360px; top: 220px;">
+          <div class="text-xs text-gray-400 mb-1 text-center">6. {{ positions[5] }}</div>
+          <component v-if="cards[5]" :is="getComponentFor(cards[5])" :reversed="cards[5].isReversed" />
+        </div>
+      </div>
+    </div>
+
+    
   </div>
+  <BottomDock v-if="cards.length === 6">
+    <PromptPanel :cards="promptCards" :positions="positions" spread="Relationship" placeholder="What should I understand about this relationship?" />
+  </BottomDock>
 </template>
 
 <script setup lang="ts">
 import { useDeck } from '@/composables/useDeck'
 import PromptPanel from '@/components/PromptPanel.vue'
+import BottomDock from '@/components/BottomDock.vue'
 const { createDeck, shuffleDeck, deal, getComponentFor } = useDeck()
 const positions = ['You','Them','Relationship Now','Challenges','Strengths','Future Potential']
 const cards = ref<any[]>([])

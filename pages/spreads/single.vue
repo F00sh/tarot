@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-5xl mx-auto px-4 py-8">
+  <div class="max-w-5xl mx-auto px-4 py-8 pb-64">
     <h1 class="text-2xl font-semibold">Single Card Draw</h1>
     <p class="text-gray-300 mt-1">How many cards: 1 • Quick daily guidance or yes/no.</p>
 
@@ -12,13 +12,17 @@
       <component v-if="cards[0]" :is="getComponentFor(cards[0])" :reversed="cards[0].isReversed" />
     </div>
 
-    <PromptPanel v-if="cards.length" :cards="promptCards" :positions="['Focus']" spread="Single Card Draw" placeholder="What guidance do I need today?" />
+    
   </div>
+  <BottomDock v-if="cards.length">
+    <PromptPanel :cards="promptCards" :positions="['Focus']" spread="Single Card Draw" placeholder="What guidance do I need today?" />
+  </BottomDock>
 </template>
 
 <script setup lang="ts">
 import { useDeck } from '@/composables/useDeck'
 import PromptPanel from '@/components/PromptPanel.vue'
+import BottomDock from '@/components/BottomDock.vue'
 
 const { createDeck, shuffleDeck, deal, getComponentFor } = useDeck()
 const cards = ref<any[]>([])
