@@ -20,15 +20,15 @@
     <!-- Major Arcana -->
     <section v-if="show.majors" class="mt-8">
       <h2 class="text-2xl font-semibold">Major Arcana</h2>
-      <div class="mt-4 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
         <button
           v-for="c in filteredMajors"
           :key="c.slug"
           class="group focus:outline-none flex flex-col items-center"
           @click="openCard(c)"
         >
-          <CardBySlug :slug="c.slug" size="sm" :clear="true" :interactive="false" />
-          <div class="mt-1 text-xs text-gray-300 text-center">{{ c.name }}</div>
+          <CardBySlug :slug="c.slug" :clear="true" :interactive="false" />
+          <div class="mt-2 text-base text-gray-200 text-center">{{ c.name }}</div>
         </button>
       </div>
     </section>
@@ -36,15 +36,15 @@
     <!-- Minor Arcana by suit -->
     <section v-for="s in filteredSuits" :key="s.name" class="mt-10">
       <h2 class="text-2xl font-semibold">Minor Arcana — {{ s.name }}</h2>
-      <div class="mt-4 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
         <button
           v-for="c in s.cards"
           :key="c.slug"
           class="group focus:outline-none flex flex-col items-center"
           @click="openCard(c)"
         >
-          <CardBySlug :slug="c.slug" size="sm" :clear="true" :interactive="false" />
-          <div class="mt-1 text-xs text-gray-300 text-center">{{ c.name }}</div>
+          <CardBySlug :slug="c.slug" :clear="true" :interactive="false" />
+          <div class="mt-2 text-base text-gray-200 text-center">{{ c.name }}</div>
         </button>
       </div>
     </section>

@@ -24,6 +24,6 @@ import { useViewport } from '@/composables/useViewport'
 
 provide('cardClear', true)
 const { isPortrait } = useViewport()
-const globalCardSize = computed(() => (isPortrait.value ? 'md' : 'sm'))
+const globalCardSize = computed(() => (isPortrait.value ? 'xl' : 'lg'))
 provide('cardSize', globalCardSize)
 </script>

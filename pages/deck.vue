@@ -1,6 +1,7 @@
 <template>
-  <div class="max-w-6xl mx-auto px-4 py-8 pb-64">
-    <h1 class="text-3xl font-semibold mb-6">Tarot Deck</h1>
+  <div class="max-w-6xl mx-auto px-4 py-8 w-full overflow-hidden md:grid md:grid-cols-12 md:gap-6">
+    <div class="md:col-span-8">
+      <h1 class="text-3xl font-semibold mb-6">Tarot Deck</h1>
 
     <div class="flex flex-wrap items-center gap-3">
       <button @click="onShuffle" class="px-4 py-2 rounded bg-yellow-500 text-black font-medium hover:bg-yellow-400">Shuffle</button>
@@ -21,10 +22,14 @@
         :reversed="card.isReversed"
       />
     </div>
-
-    
+    </div>
+    <aside class="hidden md:block md:col-span-4 pt-4">
+      <div class="sticky top-24">
+        <PromptPanel v-if="dealt.length" :cards="promptCards" spread="Free Draw" />
+      </div>
+    </aside>
   </div>
-  <ChatPanelLauncher v-if="dealt.length" :cards="promptCards" spread="Free Draw" />
+  <ChatPanelLauncher class="md:hidden" v-if="dealt.length" :cards="promptCards" spread="Free Draw" />
   
 </template>
 
@@ -32,6 +37,7 @@
 import { provide } from 'vue'
 import { useDeck } from '@/composables/useDeck'
 import ChatPanelLauncher from '@/components/ChatPanelLauncher.vue'
+import PromptPanel from '@/components/PromptPanel.vue'
 
 const { dealt, shuffleDeck, cutDeck, deal, createDeck, getComponentFor } = useDeck()
 
