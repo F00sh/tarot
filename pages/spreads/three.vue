@@ -17,16 +17,14 @@
 
     
   </div>
-  <BottomDock v-if="cards.length === 3">
-    <PromptPanel :cards="promptCards" :positions="positions" spread="Three-Card (Past-Present-Future)" placeholder="What is the situation and how does it evolve?" />
-  </BottomDock>
+  <ChatPanelLauncher v-if="cards.length === 3" :cards="promptCards" :positions="positions" spread="Three-Card (Past-Present-Future)" placeholder="What is the situation and how does it evolve?" />
 </template>
 
 <script setup lang="ts">
 import { provide } from 'vue'
 import { useDeck } from '@/composables/useDeck'
 import PromptPanel from '@/components/PromptPanel.vue'
-import BottomDock from '@/components/BottomDock.vue'
+import ChatPanelLauncher from '@/components/ChatPanelLauncher.vue'
 const { createDeck, shuffleDeck, deal, getComponentFor } = useDeck()
 const positions = ['Past', 'Present', 'Future']
 const cards = ref<any[]>([])

@@ -24,9 +24,7 @@
 
     
   </div>
-  <BottomDock v-if="dealt.length">
-    <PromptPanel :cards="promptCards" spread="Free Draw" />
-  </BottomDock>
+  <ChatPanelLauncher v-if="dealt.length" :cards="promptCards" spread="Free Draw" />
   
 </template>
 
@@ -34,7 +32,7 @@
 import { provide } from 'vue'
 import { useDeck } from '@/composables/useDeck'
 import PromptPanel from '@/components/PromptPanel.vue'
-import BottomDock from '@/components/BottomDock.vue'
+import ChatPanelLauncher from '@/components/ChatPanelLauncher.vue'
 
 const { dealt, shuffleDeck, cutDeck, deal, createDeck, getComponentFor } = useDeck()
 

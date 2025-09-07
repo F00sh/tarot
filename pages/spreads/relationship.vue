@@ -47,16 +47,14 @@
 
     
   </div>
-  <BottomDock v-if="cards.length === 6">
-    <PromptPanel :cards="promptCards" :positions="positions" spread="Relationship" placeholder="What should I understand about this relationship?" />
-  </BottomDock>
+  <ChatPanelLauncher v-if="cards.length === 6" :cards="promptCards" :positions="positions" spread="Relationship" placeholder="What should I understand about this relationship?" />
 </template>
 
 <script setup lang="ts">
 import { provide } from 'vue'
 import { useDeck } from '@/composables/useDeck'
 import PromptPanel from '@/components/PromptPanel.vue'
-import BottomDock from '@/components/BottomDock.vue'
+import ChatPanelLauncher from '@/components/ChatPanelLauncher.vue'
 import SpreadScaler from '@/components/SpreadScaler.vue'
 const { createDeck, shuffleDeck, deal, getComponentFor } = useDeck()
 const positions = ['You','Them','Relationship Now','Challenges','Strengths','Future Potential']

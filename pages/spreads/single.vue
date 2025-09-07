@@ -14,16 +14,14 @@
 
     
   </div>
-  <BottomDock v-if="cards.length">
-    <PromptPanel :cards="promptCards" :positions="['Focus']" spread="Single Card Draw" placeholder="What guidance do I need today?" />
-  </BottomDock>
+  <ChatPanelLauncher v-if="cards.length" :cards="promptCards" :positions="['Focus']" spread="Single Card Draw" placeholder="What guidance do I need today?" />
 </template>
 
 <script setup lang="ts">
 import { provide } from 'vue'
 import { useDeck } from '@/composables/useDeck'
 import PromptPanel from '@/components/PromptPanel.vue'
-import BottomDock from '@/components/BottomDock.vue'
+import ChatPanelLauncher from '@/components/ChatPanelLauncher.vue'
 
 const { createDeck, shuffleDeck, deal, getComponentFor } = useDeck()
 const cards = ref<any[]>([])

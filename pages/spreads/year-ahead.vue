@@ -17,16 +17,14 @@
 
     
   </div>
-  <BottomDock v-if="cards.length === 12">
-    <PromptPanel :cards="promptCards" :positions="months" spread="Year Ahead" placeholder="What themes define my upcoming year?" />
-  </BottomDock>
+  <ChatPanelLauncher v-if="cards.length === 12" :cards="promptCards" :positions="months" spread="Year Ahead" placeholder="What themes define my upcoming year?" />
 </template>
 
 <script setup lang="ts">
 import { provide } from 'vue'
 import { useDeck } from '@/composables/useDeck'
 import PromptPanel from '@/components/PromptPanel.vue'
-import BottomDock from '@/components/BottomDock.vue'
+import ChatPanelLauncher from '@/components/ChatPanelLauncher.vue'
 const { createDeck, shuffleDeck, deal, getComponentFor } = useDeck()
 const months = ['January','February','March','April','May','June','July','August','September','October','November','December']
 const cards = ref<any[]>([])
