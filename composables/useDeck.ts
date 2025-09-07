@@ -86,5 +86,4 @@ export const useDeck = () => {
   }
 }
 
-// Back-compat: re-export getCardData for any imports from useDeck
-export { getCardData } from './useCards'
+// Note: getCardData is exported from composables/useCards.ts to avoid circular imports

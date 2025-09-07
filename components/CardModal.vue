@@ -29,11 +29,10 @@
       </div>
     </div>
   </div>
-  
-  </div>
 </template>
 
 <script setup lang="ts">
+import { watch, onBeforeUnmount } from 'vue'
 import CardBySlug from '@/components/cards/_CardBySlug.vue'
 import type { CardInfo } from '@/data/cards'
 

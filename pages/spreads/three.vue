@@ -23,7 +23,6 @@
 <script setup lang="ts">
 import { provide } from 'vue'
 import { useDeck } from '@/composables/useDeck'
-import PromptPanel from '@/components/PromptPanel.vue'
 import ChatPanelLauncher from '@/components/ChatPanelLauncher.vue'
 const { createDeck, shuffleDeck, deal, getComponentFor } = useDeck()
 const positions = ['Past', 'Present', 'Future']
