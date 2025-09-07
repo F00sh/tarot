@@ -18,13 +18,9 @@
         </div>
       </div>
     </div>
-    <aside class="hidden md:block md:col-span-4 pt-12">
-      <div class="sticky top-24">
-        <PromptPanel v-if="cards.length === 12" :cards="promptCards" :positions="months" spread="Year Ahead" placeholder="What themes define my upcoming year?" />
-      </div>
-    </aside>
+    <!-- Chat sidebar removed; use floating launcher -->
   </div>
-  <ChatPanelLauncher class="md:hidden" v-if="cards.length === 12" :cards="promptCards" :positions="months" spread="Year Ahead" placeholder="What themes define my upcoming year?" />
+  <ChatPanelLauncher v-if="cards.length === 12" :cards="promptCards" :positions="months" spread="Year Ahead" placeholder="What themes define my upcoming year?" />
 </template>
 
 <script setup lang="ts">

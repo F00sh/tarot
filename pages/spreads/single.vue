@@ -17,13 +17,9 @@
         </div>
       </div>
     </div>
-    <aside class="hidden md:block md:col-span-4 pt-12">
-      <div class="sticky top-24">
-        <PromptPanel v-if="cards.length" :cards="promptCards" :positions="['Focus']" spread="Single Card Draw" placeholder="What guidance do I need today?" />
-      </div>
-    </aside>
+    <!-- Chat sidebar removed; use floating launcher -->
   </div>
-  <ChatPanelLauncher class="md:hidden" v-if="cards.length" :cards="promptCards" :positions="['Focus']" spread="Single Card Draw" placeholder="What guidance do I need today?" />
+  <ChatPanelLauncher v-if="cards.length" :cards="promptCards" :positions="['Focus']" spread="Single Card Draw" placeholder="What guidance do I need today?" />
 </template>
 
 <script setup lang="ts">

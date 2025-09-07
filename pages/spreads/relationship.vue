@@ -57,14 +57,9 @@
       </div>
     </div>
 
-    <!-- Right sidebar: Chat -->
-    <aside class="hidden md:block md:col-span-4 pt-12">
-      <div class="sticky top-24">
-        <PromptPanel v-if="cards.length === 6" :cards="promptCards" :positions="positions" spread="Relationship" placeholder="What should I understand about this relationship?" />
-      </div>
-    </aside>
+    <!-- Chat sidebar removed; use floating launcher -->
   </div>
-  <ChatPanelLauncher class="md:hidden" v-if="cards.length === 6" :cards="promptCards" :positions="positions" spread="Relationship" placeholder="What should I understand about this relationship?" />
+  <ChatPanelLauncher v-if="cards.length === 6" :cards="promptCards" :positions="positions" spread="Relationship" placeholder="What should I understand about this relationship?" />
 </template>
 
 <script setup lang="ts">

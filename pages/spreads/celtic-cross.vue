@@ -76,16 +76,11 @@
       </div>
     </div>
 
-    <!-- Right: Chat (desktop) -->
-    <aside class="hidden md:block md:col-span-4 pt-12">
-      <div class="sticky top-24">
-        <PromptPanel v-if="cards.length === 10" :cards="promptCards" :positions="positions" spread="Celtic Cross" placeholder="What would you like to understand in depth?" />
-      </div>
-    </aside>
+    <!-- Right: Chat sidebar removed; use floating launcher instead -->
   </div>
 
   <!-- Mobile chat launcher -->
-  <ChatPanelLauncher class="md:hidden" v-if="cards.length === 10" :cards="promptCards" :positions="positions" spread="Celtic Cross" placeholder="What would you like to understand in depth?" />
+  <ChatPanelLauncher v-if="cards.length === 10" :cards="promptCards" :positions="positions" spread="Celtic Cross" placeholder="What would you like to understand in depth?" />
 </template>
 
 <script setup lang="ts">

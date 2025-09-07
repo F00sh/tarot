@@ -19,13 +19,9 @@
         </div>
       </div>
     </div>
-    <aside class="hidden md:block md:col-span-4 pt-12">
-      <div class="sticky top-24">
-        <PromptPanel v-if="cards.length === 3" :cards="promptCards" :positions="positions" spread="Three-Card (Past-Present-Future)" placeholder="What is the situation and how does it evolve?" />
-      </div>
-    </aside>
+    <!-- Chat sidebar removed; use floating launcher -->
   </div>
-  <ChatPanelLauncher class="md:hidden" v-if="cards.length === 3" :cards="promptCards" :positions="positions" spread="Three-Card (Past-Present-Future)" placeholder="What is the situation and how does it evolve?" />
+  <ChatPanelLauncher v-if="cards.length === 3" :cards="promptCards" :positions="positions" spread="Three-Card (Past-Present-Future)" placeholder="What is the situation and how does it evolve?" />
 </template>
 
 <script setup lang="ts">

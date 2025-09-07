@@ -1,20 +1,29 @@
 <template>
-  <div class="md:hidden">
-    <!-- Toggle button (mobile only by default) -->
+  <div>
+    <!-- Toggle button (mobile: bottom-right, desktop: top-right) -->
     <button
-      class="fixed z-70 bottom-4 right-4 px-3 py-2 rounded bg-tarot-accent text-white text-sm font-medium shadow-lg hover:opacity-90"
+      class="fixed z-[70] bottom-4 right-4 md:top-24 md:bottom-auto md:right-4 px-3 py-2 rounded bg-tarot-accent text-white text-sm font-medium shadow-lg hover:opacity-90"
       @click="open = !open"
     >
       {{ open ? 'Close Chat' : 'ChatGPT' }}
     </button>
 
-    <!-- Mobile bottom sheet -->
-    <div v-if="open"
-      class="fixed z-70 left-0 right-0 bottom-0 w-full border-t border-purple-900/60 bg-black/85 backdrop-blur"
-      style="padding-bottom: env(safe-area-inset-bottom);"
-    >
-      <div class="px-3 py-2">
-        <PromptPanel :cards="cards" :positions="positions" :spread="spread" :placeholder="placeholder" />
+    <div v-if="open">
+      <!-- Mobile bottom sheet -->
+      <div
+        class="fixed z-[70] md:hidden left-0 right-0 bottom-0 w-full border-t border-purple-900/60 bg-black/85 backdrop-blur"
+        style="padding-bottom: env(safe-area-inset-bottom);"
+      >
+        <div class="px-3 py-2">
+          <PromptPanel :cards="cards" :positions="positions" :spread="spread" :placeholder="placeholder" />
+        </div>
+      </div>
+
+      <!-- Desktop floating panel on the right, in front of spread -->
+      <div class="hidden md:block fixed z-[70] right-4 top-28 w-[420px] max-h-[72vh] overflow-auto rounded-lg border border-purple-900/60 bg-black/85 backdrop-blur shadow-2xl">
+        <div class="p-3">
+          <PromptPanel :cards="cards" :positions="positions" :spread="spread" :placeholder="placeholder" />
+        </div>
       </div>
     </div>
   </div>

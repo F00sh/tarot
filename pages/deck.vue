@@ -29,7 +29,7 @@
       </div>
     </aside>
   </div>
-  <ChatPanelLauncher class="md:hidden" v-if="dealt.length" :cards="promptCards" spread="Free Draw" />
+  <ChatPanelLauncher v-if="dealt.length" :cards="promptCards" spread="Free Draw" />
   
 </template>
 
