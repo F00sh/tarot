@@ -8,7 +8,7 @@
       <button @click="reset" class="px-4 py-2 rounded bg-gray-700 hover:bg-gray-600">Reset</button>
     </div>
 
-    <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+    <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 justify-items-center w-full overflow-hidden">
       <component v-if="cards[0]" :is="getComponentFor(cards[0])" :reversed="cards[0].isReversed" />
     </div>
 
@@ -46,5 +46,6 @@ const promptCards = computed(() => cards.value.map((c: any) => ({
 })))
 
 provide('cardClear', true)
+provide('cardSize', 'sm')
 </script>
 

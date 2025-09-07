@@ -8,7 +8,7 @@
       <button @click="reset" class="px-4 py-2 rounded bg-gray-700 hover:bg-gray-600">Reset</button>
     </div>
 
-    <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-6">
+    <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 justify-items-center w-full overflow-hidden">
       <div v-for="(c, i) in cards" :key="i" class="flex flex-col items-center">
         <div class="text-sm text-gray-400 mb-2">{{ positions[i] }}</div>
         <component v-if="c" :is="getComponentFor(c)" :reversed="c.isReversed" />
@@ -42,5 +42,6 @@ const promptCards = computed(() => cards.value.map((c: any) => ({
 })))
 
 provide('cardClear', true)
+provide('cardSize', 'sm')
 </script>
 

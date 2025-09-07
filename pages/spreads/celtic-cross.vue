@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-6xl mx-auto px-4 py-8 pb-64">
+  <div class="max-w-6xl mx-auto px-4 py-8 pb-64 w-full overflow-hidden">
     <h1 class="text-2xl font-semibold">Celtic Cross</h1>
     <p class="text-gray-300 mt-1">How many cards: 10 • Full, detailed reading.</p>
 
@@ -95,5 +95,6 @@ const promptCards = computed(() => cards.value.map((c: any) => ({
 })))
 
 provide('cardClear', true)
+provide('cardSize', 'sm')
 </script>
 
