@@ -9,7 +9,7 @@
     </div>
 
     <!-- Scaled relationship composition, fits viewport -->
-    <div class="mt-6" style="height: min(60vh, 600px);">
+    <div class="mt-6 w-full overflow-hidden" style="height: calc(100dvh - 160px);">
       <SpreadScaler :width="900" :height="420">
       <div class="relative" style="width: 900px; height: 420px;">
         <!-- Row 1: You (left), Relationship Now (center), Them (right) -->

@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <div class="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 justify-items-center w-full overflow-hidden">
       <component
         v-for="card in dealt"
         :key="card.id + '-' + (card.isReversed ? 'r' : 'u')"

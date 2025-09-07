@@ -19,6 +19,11 @@
 </template>
 
 <script setup lang="ts">
-import { provide } from 'vue'
+import { provide, computed } from 'vue'
+import { useViewport } from '@/composables/useViewport'
+
 provide('cardClear', true)
+const { isPortrait } = useViewport()
+const globalCardSize = computed(() => (isPortrait.value ? 'md' : 'sm'))
+provide('cardSize', globalCardSize)
 </script>

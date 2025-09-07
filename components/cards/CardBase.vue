@@ -18,9 +18,9 @@
 
     <!-- Content appears only when overlay is open -->
     <div v-if="overlayOpen" class="absolute inset-0 px-3 py-4 flex flex-col items-center text-center text-gray-200">
-      <h3 class="text-lg font-semibold drop-shadow-[0_1px_1px_rgba(0,0,0,0.6)]">{{ name }}</h3>
-      <div class="mt-2 text-[10px] uppercase tracking-wide text-gray-300">Keywords</div>
-      <ul class="mt-1 space-y-1 text-sm text-gray-100">
+      <h3 class="text-base md:text-lg font-semibold drop-shadow-[0_1px_1px_rgba(0,0,0,0.6)]">{{ name }}</h3>
+      <div class="mt-2 text-[10px] md:text-xs uppercase tracking-wide text-gray-300">Keywords</div>
+      <ul class="mt-1 space-y-1 text-sm md:text-base text-gray-100">
         <li v-for="(k, i) in shownKeywords" :key="i">{{ k }}</li>
       </ul>
       <div class="mt-auto" />
@@ -63,8 +63,11 @@ const props = defineProps<{
 const isReversed = computed(() => !!props.reversed)
 const shownKeywords = computed(() => (isReversed.value ? props.reversedKeywords : props.uprightKeywords).slice(0, 4))
 
+const providedSize = inject('cardSize', 'md') as any
+const effectiveSize = computed<'sm'|'md'|'lg'>(() => (props.size ?? (typeof providedSize === 'string' ? providedSize : (providedSize?.value ?? 'md'))))
+
 const sizeClass = computed(() => {
-  switch (props.size) {
+  switch (effectiveSize.value) {
     case 'sm':
       return 'w-24 h-36'
     case 'lg':

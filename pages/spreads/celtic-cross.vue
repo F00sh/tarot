@@ -9,7 +9,7 @@
     </div>
 
     <!-- Scaled realistic Celtic Cross layout, fits viewport -->
-    <div class="mt-6" style="height: min(65vh, 700px);">
+    <div class="mt-6 w-full overflow-hidden" style="height: calc(100dvh - 160px);">
       <SpreadScaler :width="900" :height="520">
       <div class="relative" style="width: 900px; height: 520px;">
         <!-- Cross center (1) -->
