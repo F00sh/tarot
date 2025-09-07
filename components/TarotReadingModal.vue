@@ -1,0 +1,150 @@
+<template>
+  <div v-if="open" class="fixed inset-0 z-[90]">
+    <div class="absolute inset-0 bg-black/70" @click="onCloseClick" />
+    <div
+      role="dialog"
+      aria-modal="true"
+      class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(96vw,640px)] max-h-[85vh] overflow-hidden rounded-2xl border border-purple-500/60 bg-black text-gray-100 shadow-2xl"
+    >
+      <!-- Header -->
+      <div class="px-4 py-3 border-b border-purple-800/60 flex items-center justify-between">
+        <h3 class="text-lg font-semibold">Tarot Reading</h3>
+        <button
+          aria-label="Close"
+          class="p-1.5 rounded-md border border-transparent hover:border-purple-500/60 hover:bg-purple-900/20 text-xl leading-none"
+          @click="onCloseClick"
+        >
+          ×
+        </button>
+      </div>
+
+      <!-- Body -->
+      <div class="p-4 space-y-4 overflow-auto max-h-[70vh]">
+        <!-- Prompt selector -->
+        <div>
+          <div class="text-sm text-gray-300 mb-2">Choose tone</div>
+          <div class="flex flex-wrap gap-3">
+            <button
+              type="button"
+              :class="buttonClass('optimist')"
+              @click="selected = 'optimist'"
+            >Optimist</button>
+            <button
+              type="button"
+              :class="buttonClass('realist')"
+              @click="selected = 'realist'"
+            >Realist</button>
+            <button
+              type="button"
+              :class="buttonClass('pessimist')"
+              @click="selected = 'pessimist'"
+            >Pessimist</button>
+          </div>
+        </div>
+
+        <!-- Question input -->
+        <div>
+          <label for="tarot-question" class="block text-sm text-gray-300 mb-1">Your question</label>
+          <textarea
+            id="tarot-question"
+            v-model="userInput"
+            rows="6"
+            placeholder="Ask a specific question for the reading..."
+            class="w-full p-3 rounded-md bg-black placeholder:text-gray-500 border border-purple-500/60 focus:outline-none focus:ring-2 focus:ring-purple-500/60"
+          />
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+          <div class="text-xs text-gray-400">Hidden prompt: {{ selectedLabel }}</div>
+          <div class="flex items-center gap-3">
+            <button
+              type="button"
+              class="px-4 py-2 rounded-full border border-purple-500/70 hover:bg-purple-900/30 hover:border-purple-400 transition-colors"
+              @click="handleCopy"
+            >Copy</button>
+            <button
+              type="button"
+              class="px-4 py-2 rounded-full border border-purple-500/70 hover:bg-purple-900/30 hover:border-purple-400 transition-colors"
+              @click="openChatGPT"
+            >ChatGPT</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</template>
+
+<script setup lang="ts">
+const props = defineProps<{ open: boolean }>()
+const emit = defineEmits<{ (e: 'close'): void }>()
+
+type PromptKey = 'optimist' | 'realist' | 'pessimist'
+const prompts: Record<PromptKey, string> = {
+  optimist: 'You are an optimistic tarot reader. Provide uplifting, hopeful, and positive guidance.',
+  realist: 'You are a realistic tarot reader. Provide grounded, balanced, and practical guidance.',
+  pessimist: 'You are a cautious tarot reader. Provide critical, challenging, and warning-focused guidance.'
+}
+
+const selected = ref<PromptKey>('optimist')
+const userInput = ref('')
+
+const selectedLabel = computed(() => {
+  switch (selected.value) {
+    case 'optimist': return 'Optimist'
+    case 'realist': return 'Realist'
+    case 'pessimist': return 'Pessimist'
+  }
+})
+
+function buttonClass(key: PromptKey) {
+  const active = selected.value === key
+  return [
+    'px-6 py-2 rounded-full border transition-colors',
+    active
+      ? 'border-purple-400 bg-purple-900/40 shadow-[inset_0_0_0_1px_rgba(168,85,247,0.6)]'
+      : 'border-purple-500/70 hover:bg-purple-900/30 hover:border-purple-400'
+  ]
+}
+
+function onCloseClick() {
+  emit('close')
+}
+
+function buildCopyText() {
+  const header = prompts[selected.value]
+  const q = userInput.value?.trim() || ''
+  return `${header}\n\nUser Question: ${q}`
+}
+
+async function handleCopy() {
+  try {
+    const text = buildCopyText()
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text)
+    } else {
+      // Fallback: create temporary textarea
+      const ta = document.createElement('textarea')
+      ta.value = text
+      document.body.appendChild(ta)
+      ta.select()
+      document.execCommand('copy')
+      document.body.removeChild(ta)
+    }
+    // Lightweight feedback
+    window.dispatchEvent(new CustomEvent('toast', { detail: { message: 'Copied to clipboard!' } }))
+  } catch (e) {
+    console.error('Copy failed', e)
+    alert('Copy failed — please try again.')
+  }
+}
+
+function openChatGPT() {
+  window.open('https://chatgpt.com', '_blank', 'noopener')
+}
+</script>
+
+<style scoped>
+</style>
+

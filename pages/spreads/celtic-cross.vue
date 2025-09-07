@@ -1,7 +1,6 @@
 <template>
-  <div class="max-w-none mx-auto px-4 py-8 w-full overflow-hidden md:grid md:grid-cols-12 md:gap-6">
-    <!-- Left: content -->
-    <div class="md:col-span-8">
+  <div class="max-w-none mx-auto px-4 py-8 w-full overflow-hidden">
+    <div class="max-w-6xl mx-auto">
       <h1 class="text-2xl font-semibold">Celtic Cross</h1>
       <p class="text-gray-300 mt-1">How many cards: 10 • Full, detailed reading.</p>
 
@@ -21,62 +20,100 @@
       </div>
 
       <!-- Desktop: scaled spread canvas -->
-      <div class="hidden md:block mt-6 w-full overflow-hidden" style="height: calc(100dvh - 200px);">
+      <div class="hidden md:block mt-6 w-full overflow-hidden grid place-items-center" style="height: calc(100dvh - 140px);">
         <SpreadScaler :width="900" :height="520">
-        <div class="relative" style="width: 900px; height: 520px;">
+        <div class="relative" style="width: 980px; height: 560px;">
           <!-- Cross center (1) -->
-          <div class="absolute" style="left: 260px; top: 160px;">
-            <div class="text-xs text-gray-400 mb-1 text-center">1. {{ positions[0] }}</div>
-            <component v-if="cards[0]" :is="getComponentFor(cards[0])" :reversed="cards[0].isReversed" />
+          <div class="absolute" style="left: 300px; top: 170px;">
+            <div class="relative">
+              <PositionProvider :label="positions[0]">
+                <component v-if="cards[0]" :is="getComponentFor(cards[0])" :reversed="cards[0].isReversed" />
+              </PositionProvider>
+              <div class="absolute -top-3 left-0 z-20 pointer-events-none bg-black/60 text-gray-100 text-xs px-2 py-0.5 rounded">1. {{ positions[0] }}</div>
+            </div>
           </div>
           <!-- Crossing (2) slightly offset to overlap without rotation for readability -->
-          <div class="absolute" style="left: 275px; top: 145px;">
-            <div class="text-xs text-gray-400 mb-1 text-center">2. {{ positions[1] }}</div>
-            <component v-if="cards[1]" :is="getComponentFor(cards[1])" :reversed="cards[1].isReversed" />
+          <div class="absolute" style="left: 315px; top: 155px;">
+            <div class="relative">
+              <PositionProvider :label="positions[1]">
+                <component v-if="cards[1]" :is="getComponentFor(cards[1])" :reversed="cards[1].isReversed" />
+              </PositionProvider>
+              <div class="absolute -top-3 left-0 z-20 pointer-events-none bg-black/60 text-gray-100 text-xs px-2 py-0.5 rounded">2. {{ positions[1] }}</div>
+            </div>
           </div>
           <!-- Left (3 - Past) -->
-          <div class="absolute" style="left: 60px; top: 160px;">
-            <div class="text-xs text-gray-400 mb-1 text-center">3. {{ positions[2] }}</div>
-            <component v-if="cards[2]" :is="getComponentFor(cards[2])" :reversed="cards[2].isReversed" />
+          <div class="absolute" style="left: 40px; top: 170px;">
+            <div class="relative">
+              <PositionProvider :label="positions[2]">
+                <component v-if="cards[2]" :is="getComponentFor(cards[2])" :reversed="cards[2].isReversed" />
+              </PositionProvider>
+              <div class="absolute -top-3 left-0 z-20 pointer-events-none bg-black/60 text-gray-100 text-xs px-2 py-0.5 rounded">3. {{ positions[2] }}</div>
+            </div>
           </div>
           <!-- Above (5) -->
-          <div class="absolute" style="left: 260px; top: -40px;">
-            <div class="text-xs text-gray-400 mb-1 text-center">5. {{ positions[4] }}</div>
-            <component v-if="cards[4]" :is="getComponentFor(cards[4])" :reversed="cards[4].isReversed" />
+          <div class="absolute" style="left: 300px; top: -60px;">
+            <div class="relative">
+              <PositionProvider :label="positions[4]">
+                <component v-if="cards[4]" :is="getComponentFor(cards[4])" :reversed="cards[4].isReversed" />
+              </PositionProvider>
+              <div class="absolute -top-3 left-0 z-20 pointer-events-none bg-black/60 text-gray-100 text-xs px-2 py-0.5 rounded">5. {{ positions[4] }}</div>
+            </div>
           </div>
           <!-- Right (4 - Future) -->
-          <div class="absolute" style="left: 460px; top: 160px;">
-            <div class="text-xs text-gray-400 mb-1 text-center">4. {{ positions[3] }}</div>
-            <component v-if="cards[3]" :is="getComponentFor(cards[3])" :reversed="cards[3].isReversed" />
+          <div class="absolute" style="left: 540px; top: 170px;">
+            <div class="relative">
+              <PositionProvider :label="positions[3]">
+                <component v-if="cards[3]" :is="getComponentFor(cards[3])" :reversed="cards[3].isReversed" />
+              </PositionProvider>
+              <div class="absolute -top-3 left-0 z-20 pointer-events-none bg-black/60 text-gray-100 text-xs px-2 py-0.5 rounded">4. {{ positions[3] }}</div>
+            </div>
           </div>
           <!-- Below (6 - Subconscious/Foundation) -->
-          <div class="absolute" style="left: 260px; top: 360px;">
-            <div class="text-xs text-gray-400 mb-1 text-center">6. {{ positions[5] }}</div>
-            <component v-if="cards[5]" :is="getComponentFor(cards[5])" :reversed="cards[5].isReversed" />
+          <div class="absolute" style="left: 300px; top: 390px;">
+            <div class="relative">
+              <PositionProvider :label="positions[5]">
+                <component v-if="cards[5]" :is="getComponentFor(cards[5])" :reversed="cards[5].isReversed" />
+              </PositionProvider>
+              <div class="absolute -top-3 left-0 z-20 pointer-events-none bg-black/60 text-gray-100 text-xs px-2 py-0.5 rounded">6. {{ positions[5] }}</div>
+            </div>
           </div>
           <!-- Staff on the right (7-10, bottom to top) -->
-          <div class="absolute" style="left: 700px; top: 360px;">
-            <div class="text-xs text-gray-400 mb-1 text-center">7. {{ positions[6] }}</div>
-            <component v-if="cards[6]" :is="getComponentFor(cards[6])" :reversed="cards[6].isReversed" />
+          <div class="absolute" style="left: 760px; top: 400px;">
+            <div class="relative">
+              <PositionProvider :label="positions[6]">
+                <component v-if="cards[6]" :is="getComponentFor(cards[6])" :reversed="cards[6].isReversed" />
+              </PositionProvider>
+              <div class="absolute -top-3 left-0 z-20 pointer-events-none bg-black/60 text-gray-100 text-xs px-2 py-0.5 rounded">7. {{ positions[6] }}</div>
+            </div>
           </div>
-          <div class="absolute" style="left: 700px; top: 260px;">
-            <div class="text-xs text-gray-400 mb-1 text-center">8. {{ positions[7] }}</div>
-            <component v-if="cards[7]" :is="getComponentFor(cards[7])" :reversed="cards[7].isReversed" />
+          <div class="absolute" style="left: 760px; top: 290px;">
+            <div class="relative">
+              <PositionProvider :label="positions[7]">
+                <component v-if="cards[7]" :is="getComponentFor(cards[7])" :reversed="cards[7].isReversed" />
+              </PositionProvider>
+              <div class="absolute -top-3 left-0 z-20 pointer-events-none bg-black/60 text-gray-100 text-xs px-2 py-0.5 rounded">8. {{ positions[7] }}</div>
+            </div>
           </div>
-          <div class="absolute" style="left: 700px; top: 160px;">
-            <div class="text-xs text-gray-400 mb-1 text-center">9. {{ positions[8] }}</div>
-            <component v-if="cards[8]" :is="getComponentFor(cards[8])" :reversed="cards[8].isReversed" />
+          <div class="absolute" style="left: 760px; top: 180px;">
+            <div class="relative">
+              <PositionProvider :label="positions[8]">
+                <component v-if="cards[8]" :is="getComponentFor(cards[8])" :reversed="cards[8].isReversed" />
+              </PositionProvider>
+              <div class="absolute -top-3 left-0 z-20 pointer-events-none bg-black/60 text-gray-100 text-xs px-2 py-0.5 rounded">9. {{ positions[8] }}</div>
+            </div>
           </div>
-          <div class="absolute" style="left: 700px; top: 60px;">
-            <div class="text-xs text-gray-400 mb-1 text-center">10. {{ positions[9] }}</div>
-            <component v-if="cards[9]" :is="getComponentFor(cards[9])" :reversed="cards[9].isReversed" />
+          <div class="absolute" style="left: 760px; top: 70px;">
+            <div class="relative">
+              <PositionProvider :label="positions[9]">
+                <component v-if="cards[9]" :is="getComponentFor(cards[9])" :reversed="cards[9].isReversed" />
+              </PositionProvider>
+              <div class="absolute -top-3 left-0 z-20 pointer-events-none bg-black/60 text-gray-100 text-xs px-2 py-0.5 rounded">10. {{ positions[9] }}</div>
+            </div>
           </div>
         </div>
         </SpreadScaler>
       </div>
     </div>
-
-    <!-- Right: Chat sidebar removed; use floating launcher instead -->
   </div>
 
   <!-- Mobile chat launcher -->
@@ -89,6 +126,7 @@ import { useDeck } from '@/composables/useDeck'
 import ChatPanelLauncher from '@/components/ChatPanelLauncher.vue'
 import PromptPanel from '@/components/PromptPanel.vue'
 import SpreadScaler from '@/components/SpreadScaler.vue'
+import PositionProvider from '@/components/PositionProvider.vue'
 const { createDeck, shuffleDeck, deal, getComponentFor } = useDeck()
 const positions = [
   'Present','Challenge','Past','Future','Above','Below','Advice','External Influences','Hopes / Fears','Outcome'
@@ -106,6 +144,6 @@ const promptCards = computed(() => cards.value.map((c: any) => ({
 })))
 
 provide('cardClear', true)
-provide('cardSize', 'lg')
+provide('cardSize', 'md')
 </script>
 

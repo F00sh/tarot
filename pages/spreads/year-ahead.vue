@@ -1,6 +1,6 @@
 <template>
-  <div class="max-w-none mx-auto px-4 py-8 w-full overflow-hidden md:grid md:grid-cols-12 md:gap-6">
-    <div class="md:col-span-8">
+  <div class="max-w-none mx-auto px-4 py-8 w-full">
+    <div class="max-w-7xl mx-auto">
       <h1 class="text-2xl font-semibold">Year Ahead</h1>
       <p class="text-gray-300 mt-1">How many cards: 12 • One for each month.</p>
 
@@ -9,16 +9,19 @@
         <button @click="reset" class="px-4 py-2 rounded bg-gray-700 hover:bg-gray-600">Reset</button>
       </div>
 
-      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 justify-items-center w-full overflow-hidden">
+      <!-- Unified responsive grid: always visible, spaced cards -->
+      <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 justify-items-center">
         <div v-for="(c, i) in cards" :key="i" class="flex flex-col items-center text-center">
-          <div class="text-sm text-gray-300 mb-2">{{ months[i] }}</div>
-          <component v-if="c" :is="getComponentFor(c)" :reversed="c.isReversed" />
-          <div class="mt-2 text-base font-medium md:hidden">{{ c?.name }} <span class="text-gray-400">({{ c?.isReversed ? 'Reversed' : 'Upright' }})</span></div>
-          <div class="mt-1 text-sm text-gray-300 max-w-prose md:hidden">Keywords: {{ (c?.isReversed ? c?.reversedKeywords : c?.uprightKeywords).join(', ') }}</div>
+          <div class="mb-2 inline-block bg-black/60 text-gray-100 text-sm px-2 py-1 rounded">
+            <span class="font-semibold">{{ months[i] }}</span>
+            <template v-if="c"> — {{ c.name }} <span class="text-gray-300">({{ c.isReversed ? 'Reversed' : 'Upright' }})</span></template>
+          </div>
+          <PositionProvider :label="months[i]">
+            <component v-if="c" :is="getComponentFor(c)" :reversed="c.isReversed" />
+          </PositionProvider>
         </div>
       </div>
     </div>
-    <!-- Chat sidebar removed; use floating launcher -->
   </div>
   <ChatPanelLauncher v-if="cards.length === 12" :cards="promptCards" :positions="months" spread="Year Ahead" placeholder="What themes define my upcoming year?" />
 </template>
@@ -27,7 +30,7 @@
 import { provide } from 'vue'
 import { useDeck } from '@/composables/useDeck'
 import ChatPanelLauncher from '@/components/ChatPanelLauncher.vue'
-import PromptPanel from '@/components/PromptPanel.vue'
+import PositionProvider from '@/components/PositionProvider.vue'
 const { createDeck, shuffleDeck, deal, getComponentFor } = useDeck()
 const months = ['January','February','March','April','May','June','July','August','September','October','November','December']
 const cards = ref<any[]>([])
@@ -43,5 +46,7 @@ const promptCards = computed(() => cards.value.map((c: any) => ({
 })))
 
 provide('cardClear', true)
-provide('cardSize', 'lg')
+// Smaller cards to keep all 12 visible without overlap
+provide('cardSize', 'sm')
 </script>
+

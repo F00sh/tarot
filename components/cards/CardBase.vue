@@ -1,7 +1,7 @@
 <template>
   <div
     class="relative bg-tarot-card rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-[1.02] cursor-pointer select-none border border-purple-900/60"
-    :class="[sizeClass, { 'z-50 ring-2 ring-tarot-accent': bringToFront }, 'z-10']"
+    :class="[sizeClass, { 'z-[80] ring-2 ring-tarot-accent': bringToFront }, 'z-10']"
     @click="toggleOverlay"
   >
     <!-- Image layer (rotated on reversed) -->
@@ -16,33 +16,26 @@
       <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60" />
     </div>
 
-    <!-- Content appears only when overlay is open -->
-    <div v-if="overlayOpen" class="absolute inset-0 px-3 py-4 flex flex-col items-center text-center text-gray-200">
-      <h3 class="text-lg md:text-xl font-semibold drop-shadow-[0_1px_1px_rgba(0,0,0,0.6)]">{{ name }}</h3>
-      <div class="mt-2 text-xs md:text-sm uppercase tracking-wide text-gray-300">Keywords</div>
-      <ul class="mt-1 space-y-1 text-base md:text-lg text-gray-100">
+    <!-- Full black overlay and centered text when open -->
+    <div v-if="overlayOpen" class="absolute inset-0 bg-black animate-card-overlay z-[90]" />
+    <div v-if="overlayOpen" class="absolute inset-0 px-4 py-4 flex flex-col items-center justify-center text-center text-gray-100 animate-card-text z-[95]">
+      <div v-if="positionText" class="text-xs md:text-sm uppercase tracking-wide text-gray-300">{{ positionText }}</div>
+      <h3 class="mt-1 text-xl md:text-2xl font-bold">{{ name }} <span class="text-gray-300 text-base md:text-lg">({{ isReversed ? 'Reversed' : 'Upright' }})</span></h3>
+      <div class="mt-3 text-sm md:text-base text-gray-100 max-w-prose">{{ meaningLine }}</div>
+      <ul class="mt-2 space-y-1 text-sm md:text-base text-gray-200">
         <li v-for="(k, i) in shownKeywords" :key="i">{{ k }}</li>
       </ul>
-      <div class="mt-auto" />
     </div>
-
-    <!-- Dark overlay when open -->
-    <div v-if="overlayOpen" class="absolute inset-0 bg-black/60" />
 
     <!-- Close button when overlay open -->
     <button
       v-if="overlayOpen"
-      class="absolute top-2 right-2 z-10 px-2 py-1 text-xs rounded border border-purple-900/60 bg-black/40 hover:bg-black/60"
+      class="absolute top-2 right-2 z-[96] px-2 py-1 text-xs rounded border border-purple-900/60 bg-black/60 hover:bg-black/80"
       @click.stop="overlayOpen = false"
+      aria-label="Close"
     >
-      Close
+      ×
     </button>
-
-    <!-- Bottom footer: name + orientation (only when overlay open) -->
-    <div v-if="overlayOpen" class="absolute bottom-0 inset-x-0 bg-black/60 text-gray-200 text-xs px-2 py-1 flex items-center justify-between">
-      <span class="truncate">{{ name }}</span>
-      <span class="ml-2 shrink-0 text-gray-300">{{ isReversed ? 'Reversed' : 'Upright' }}</span>
-    </div>
   </div>
 </template>
 
@@ -62,6 +55,20 @@ const props = defineProps<{
 
 const isReversed = computed(() => !!props.reversed)
 const shownKeywords = computed(() => (isReversed.value ? props.reversedKeywords : props.uprightKeywords).slice(0, 4))
+const injectedPosition = inject('positionLabel', '') as string
+const positionText = computed(() => injectedPosition || '')
+const meaningLine = computed(() => {
+  const kws = shownKeywords.value
+  const pos = positionText.value || 'this position'
+  const ori = isReversed.value ? 'reversed' : 'upright'
+  if (!kws.length) return `${props.name} (${ori}) at ${pos}.`
+  const [k1, k2, k3] = kws
+  const first = `${props.name} (${ori}) at ${pos} highlights ${k1}${k2 ? ` and ${k2}` : ''}.`
+  const second = k3
+    ? `In this role, it suggests ${k1}, ${k2 || k1}, and ${k3}.`
+    : `In this role, it suggests ${k1}${k2 ? ` and ${k2}` : ''}.`
+  return `${first} ${second}`
+})
 
 const providedSize = inject('cardSize', 'md') as any
 const effectiveSize = computed<'sm'|'md'|'lg'|'xl'|'xxl'>(() => (props.size ?? (typeof providedSize === 'string' ? providedSize : (providedSize?.value ?? 'md'))))
@@ -117,4 +124,11 @@ watch(() => props.imageBase, () => {
   imageLoaded.value = false
 })
 </script>
+
+<style scoped>
+@keyframes cardOverlayIn { from { opacity: 0 } to { opacity: 1 } }
+@keyframes cardTextIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.animate-card-overlay { animation: cardOverlayIn 180ms ease-out both; }
+.animate-card-text { animation: cardTextIn 220ms ease-out both; }
+</style>
 

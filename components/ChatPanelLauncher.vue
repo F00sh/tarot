@@ -1,36 +1,21 @@
 <template>
   <div>
-    <!-- Toggle button (mobile: bottom-right, desktop: top-right) -->
+    <!-- Centered toggle button: bottom on mobile, above cards on desktop -->
     <button
-      class="fixed z-[70] bottom-4 right-4 md:top-24 md:bottom-auto md:right-4 px-3 py-2 rounded bg-tarot-accent text-white text-sm font-medium shadow-lg hover:opacity-90"
-      @click="open = !open"
+      class="fixed z-[70] left-1/2 -translate-x-1/2 bottom-4 md:top-20 md:bottom-auto px-4 py-2 rounded bg-tarot-accent text-white text-sm font-medium shadow-lg hover:opacity-90"
+      @click="open = true"
     >
-      {{ open ? 'Close Chat' : 'ChatGPT' }}
+      Reading
     </button>
 
-    <div v-if="open">
-      <!-- Mobile bottom sheet -->
-      <div
-        class="fixed z-[70] md:hidden left-0 right-0 bottom-0 w-full border-t border-purple-900/60 bg-black/85 backdrop-blur"
-        style="padding-bottom: env(safe-area-inset-bottom);"
-      >
-        <div class="px-3 py-2">
-          <PromptPanel :cards="cards" :positions="positions" :spread="spread" :placeholder="placeholder" />
-        </div>
-      </div>
-
-      <!-- Desktop floating panel on the right, in front of spread -->
-      <div class="hidden md:block fixed z-[70] right-4 top-28 w-[420px] max-h-[72vh] overflow-auto rounded-lg border border-purple-900/60 bg-black/85 backdrop-blur shadow-2xl">
-        <div class="p-3">
-          <PromptPanel :cards="cards" :positions="positions" :spread="spread" :placeholder="placeholder" />
-        </div>
-      </div>
-    </div>
+    <!-- New reading modal -->
+    <TarotReadingModal v-if="open" :open="open" @close="close" />
   </div>
+  
 </template>
 
 <script setup lang="ts">
-import PromptPanel from '@/components/PromptPanel.vue'
+import TarotReadingModal from '@/components/TarotReadingModal.vue'
 
 type Card = {
   name: string
@@ -39,7 +24,8 @@ type Card = {
   reversedKeywords: string[]
 }
 
-const props = defineProps<{
+// Keeping props for backward-compat with callers, though unused here
+defineProps<{
   cards: Card[]
   positions?: string[]
   spread?: string
@@ -47,4 +33,8 @@ const props = defineProps<{
 }>()
 
 const open = ref(false)
+
+function close() {
+  open.value = false
+}
 </script>
