@@ -1,5 +1,5 @@
 <template>
-  <div ref="outer" class="w-full h-full flex items-center justify-center overflow-hidden">
+  <div ref="outer" class="w-full h-full grid place-items-center overflow-hidden max-w-[100vw]">
     <div
       class="relative"
       :style="{
@@ -46,4 +46,3 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', recompute)
 })
 </script>
-

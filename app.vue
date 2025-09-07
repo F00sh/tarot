@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout>
-    <div class="min-h-screen bg-tarot-bg text-gray-100 w-full max-w-full overflow-x-hidden">
+    <div class="min-h-[100dvh] bg-tarot-bg text-gray-100 w-full max-w-full overflow-x-hidden">
       <NuxtPage />
     </div>
   </NuxtLayout>
