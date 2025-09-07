@@ -77,7 +77,19 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{ open: boolean }>()
+type Card = {
+  name: string
+  isReversed: boolean
+  uprightKeywords: string[]
+  reversedKeywords: string[]
+}
+
+const props = defineProps<{
+  open: boolean
+  cards?: Card[]
+  positions?: string[]
+  spread?: string
+}>()
 const emit = defineEmits<{ (e: 'close'): void }>()
 
 type PromptKey = 'optimist' | 'realist' | 'pessimist'
@@ -113,9 +125,23 @@ function onCloseClick() {
 }
 
 function buildCopyText() {
-  const header = prompts[selected.value]
+  const lines: string[] = []
+  lines.push(prompts[selected.value])
+  if (props.spread) lines.push(`Spread: ${props.spread}`)
   const q = userInput.value?.trim() || ''
-  return `${header}\n\nUser Question: ${q}`
+  if (q) {
+    lines.push('', 'User Question:', q)
+  }
+  if (props.cards && props.cards.length) {
+    lines.push('', 'Cards:')
+    props.cards.forEach((c, i) => {
+      const pos = props.positions?.[i] ? props.positions[i] + ': ' : ''
+      const kws = c.isReversed ? c.reversedKeywords : c.uprightKeywords
+      lines.push(`${i + 1}. ${pos}${c.name} (${c.isReversed ? 'reversed' : 'upright'})`)
+      if (kws?.length) lines.push(`   Keywords: ${kws.join(', ')}`)
+    })
+  }
+  return lines.join('\n')
 }
 
 async function handleCopy() {
@@ -147,4 +173,3 @@ function openChatGPT() {
 
 <style scoped>
 </style>
-

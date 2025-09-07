@@ -9,7 +9,14 @@
     </button>
 
     <!-- New reading modal -->
-    <TarotReadingModal v-if="open" :open="open" @close="close" />
+    <TarotReadingModal
+      v-if="open"
+      :open="open"
+      :cards="cards"
+      :positions="positions"
+      :spread="spread"
+      @close="close"
+    />
   </div>
   
 </template>
