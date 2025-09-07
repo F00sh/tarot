@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex flex-col">
+  <div class="min-h-screen flex flex-col overflow-x-hidden w-full">
     <header class="sticky top-0 z-10 bg-tarot-bg/80 backdrop-blur border-b border-gray-800">
       <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         <NuxtLink to="/" class="text-lg font-semibold">Tarot Deck</NuxtLink>
@@ -10,7 +10,7 @@
       </div>
     </header>
 
-    <main class="flex-1">
+    <main class="flex-1 overflow-x-hidden w-full">
       <slot />
     </main>
 

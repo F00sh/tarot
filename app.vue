@@ -16,4 +16,8 @@ html, body {
   min-height: 100%;
   overflow-x: hidden;
 }
+#__nuxt, #__layout {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
 </style>
