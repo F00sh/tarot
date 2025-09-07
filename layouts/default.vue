@@ -18,4 +18,7 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { provide } from 'vue'
+provide('cardClear', true)
+</script>

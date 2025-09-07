@@ -31,6 +31,7 @@
 </template>
 
 <script setup lang="ts">
+import { provide } from 'vue'
 import { useDeck } from '@/composables/useDeck'
 import PromptPanel from '@/components/PromptPanel.vue'
 import BottomDock from '@/components/BottomDock.vue'
@@ -49,4 +50,7 @@ const promptCards = computed(() => dealt.value.map(c => ({
   uprightKeywords: c.uprightKeywords,
   reversedKeywords: c.reversedKeywords,
 })))
+
+// Show clear cards by default on this page
+provide('cardClear', true)
 </script>

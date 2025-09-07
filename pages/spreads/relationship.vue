@@ -59,6 +59,7 @@
 </template>
 
 <script setup lang="ts">
+import { provide } from 'vue'
 import { useDeck } from '@/composables/useDeck'
 import PromptPanel from '@/components/PromptPanel.vue'
 import BottomDock from '@/components/BottomDock.vue'
@@ -75,5 +76,7 @@ const promptCards = computed(() => cards.value.map((c: any) => ({
   uprightKeywords: c.uprightKeywords,
   reversedKeywords: c.reversedKeywords,
 })))
+
+provide('cardClear', true)
 </script>
 

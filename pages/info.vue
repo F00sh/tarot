@@ -24,11 +24,11 @@
         <button
           v-for="c in filteredMajors"
           :key="c.slug"
-          class="group focus:outline-none"
+          class="group focus:outline-none flex flex-col items-center"
           @click="openCard(c)"
         >
-          <CardBySlug :slug="c.slug" size="sm" />
-          <div class="mt-1 text-xs text-gray-300 text-center truncate">{{ c.name }}</div>
+          <CardBySlug :slug="c.slug" size="sm" :clear="true" />
+          <div class="mt-1 text-xs text-gray-300 text-center">{{ c.name }}</div>
         </button>
       </div>
     </section>
@@ -40,11 +40,11 @@
         <button
           v-for="c in s.cards"
           :key="c.slug"
-          class="group focus:outline-none"
+          class="group focus:outline-none flex flex-col items-center"
           @click="openCard(c)"
         >
-          <CardBySlug :slug="c.slug" size="sm" />
-          <div class="mt-1 text-xs text-gray-300 text-center truncate">{{ c.name }}</div>
+          <CardBySlug :slug="c.slug" size="sm" :clear="true" />
+          <div class="mt-1 text-xs text-gray-300 text-center">{{ c.name }}</div>
         </button>
       </div>
     </section>
