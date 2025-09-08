@@ -1,8 +1,8 @@
 <template>
   <div class="min-h-screen flex flex-col overflow-x-hidden w-full">
-    <header class="sticky top-0 z-10">
-      <div class="mx-auto max-w-6xl px-4 pt-4">
-        <div class="surface px-4 py-3 flex items-center justify-between">
+    <header class="sticky top-0 z-20 w-full backdrop-blur bg-black/30 border-b border-white/10">
+      <div class="mx-auto max-w-6xl px-4">
+        <div class="py-3 flex items-center justify-between">
           <NuxtLink to="/" class="text-lg font-semibold text-white">Tarot Deck</NuxtLink>
           <nav class="flex items-center gap-2">
             <NuxtLink to="/deck" class="btn-ghost px-3 py-1.5">Deck</NuxtLink>

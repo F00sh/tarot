@@ -24,6 +24,16 @@
         <div class="text-sm text-gray-400">6 cards • Dynamics and outlook</div>
         <NuxtLink to="/spreads/relationship" class="inline-block mt-3 btn-primary">Open</NuxtLink>
       </li>
+      <li class="panel">
+        <div class="text-lg font-medium">🔮 Celtic Cross — Extended</div>
+        <div class="text-sm text-gray-400">10 cards • Draw one by one with optional pre-draw shuffle/cut.</div>
+        <NuxtLink to="/spreads/celtic-cross-extended" class="inline-block mt-3 btn-primary">Open</NuxtLink>
+      </li>
+      <li class="panel">
+        <div class="text-lg font-medium">🔮 Relationship — Extended</div>
+        <div class="text-sm text-gray-400">6 cards • Draw one by one with optional pre-draw shuffle/cut.</div>
+        <NuxtLink to="/spreads/relationship-extended" class="inline-block mt-3 btn-primary">Open</NuxtLink>
+      </li>
       <li class="panel md:col-span-2">
         <div class="text-lg font-medium">🔮 Year Ahead</div>
         <div class="text-sm text-gray-400">12 cards • Monthly forecast</div>
