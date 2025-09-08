@@ -1,18 +1,18 @@
 <template>
   <div class="max-w-none mx-auto px-4 py-8 w-full">
     <div class="max-w-7xl mx-auto">
-      <h1 class="text-2xl font-semibold">Year Ahead</h1>
-      <p class="text-gray-300 mt-1">How many cards: 12 • One for each month.</p>
+      <h1 class="text-2xl font-semibold text-center">Year Ahead</h1>
+      <p class="text-gray-300 mt-1 text-center">How many cards: 12 • One for each month.</p>
 
-      <div class="mt-4 flex items-center gap-3">
-        <button @click="draw" class="px-4 py-2 rounded bg-yellow-500 text-black font-medium hover:bg-yellow-400">Draw</button>
-        <button @click="reset" class="px-4 py-2 rounded bg-gray-700 hover:bg-gray-600">Reset</button>
+      <div class="mt-4 flex items-center justify-center gap-3">
+        <button @click="draw" class="btn-warn">Draw</button>
+        <button @click="reset" class="btn-muted">Reset</button>
       </div>
 
       <!-- Unified responsive grid: always visible, spaced cards -->
       <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 justify-items-center">
         <div v-for="(c, i) in cards" :key="i" class="flex flex-col items-center text-center">
-          <div class="mb-2 inline-block bg-black/60 text-gray-100 text-sm px-2 py-1 rounded">
+          <div class="mb-2 chip">
             <span class="font-semibold">{{ months[i] }}</span>
             <template v-if="c"> — {{ c.name }} <span class="text-gray-300">({{ c.isReversed ? 'Reversed' : 'Upright' }})</span></template>
           </div>
@@ -49,4 +49,3 @@ provide('cardClear', true)
 // Smaller cards to keep all 12 visible without overlap
 provide('cardSize', 'sm')
 </script>
-

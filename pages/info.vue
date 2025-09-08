@@ -1,12 +1,12 @@
 <template>
   <div class="max-w-6xl mx-auto px-4 py-10">
-    <h1 class="text-3xl font-semibold">Card Info</h1>
-    <p class="text-gray-300 mt-2">Browse all cards by arcana. Click a card for keywords and details.</p>
+    <h1 class="text-3xl font-semibold text-center">Card Info</h1>
+    <p class="text-gray-300 mt-2 text-center">Browse all cards by arcana. Click a card for keywords and details.</p>
 
     <!-- Filters -->
-    <div class="mt-6 p-3 rounded border border-purple-900/60 bg-black/30">
+    <div class="mt-6 panel">
       <div class="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
-        <input v-model="q" type="text" placeholder="Search name or keyword..." class="w-full sm:w-1/2 px-3 py-2 rounded bg-black/60 border border-purple-900/60 text-gray-200 placeholder:text-gray-500" />
+        <input v-model="q" type="text" placeholder="Search name or keyword..." class="w-full sm:w-1/2 px-3 py-2 rounded bg-white/10 border border-white/20 text-gray-100 placeholder:text-gray-400" />
         <div class="flex flex-wrap items-center gap-3 text-sm">
           <label class="inline-flex items-center gap-1"><input type="checkbox" v-model="show.majors" /> Majors</label>
           <label class="inline-flex items-center gap-1"><input type="checkbox" v-model="show.wands" /> Wands</label>
@@ -20,7 +20,7 @@
     <!-- Major Arcana -->
     <section v-if="show.majors" class="mt-8">
       <h2 class="text-2xl font-semibold">Major Arcana</h2>
-      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 justify-items-center">
         <button
           v-for="c in filteredMajors"
           :key="c.slug"
@@ -36,7 +36,7 @@
     <!-- Minor Arcana by suit -->
     <section v-for="s in filteredSuits" :key="s.name" class="mt-10">
       <h2 class="text-2xl font-semibold">Minor Arcana — {{ s.name }}</h2>
-      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 justify-items-center">
         <button
           v-for="c in s.cards"
           :key="c.slug"

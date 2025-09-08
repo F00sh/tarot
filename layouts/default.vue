@@ -1,12 +1,14 @@
 <template>
   <div class="min-h-screen flex flex-col overflow-x-hidden w-full">
-    <header class="sticky top-0 z-10 bg-tarot-bg/80 backdrop-blur border-b border-gray-800">
-      <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        <NuxtLink to="/" class="text-lg font-semibold text-purple-300 hover:text-purple-200">Tarot Deck</NuxtLink>
-        <nav class="flex items-center gap-4 text-sm text-gray-300">
-          <NuxtLink to="/deck" class="hover:text-white">Deck</NuxtLink>
-          <NuxtLink to="/spreads" class="hover:text-white">Spreads</NuxtLink>
-        </nav>
+    <header class="sticky top-0 z-10">
+      <div class="mx-auto max-w-6xl px-4 pt-4">
+        <div class="surface px-4 py-3 flex items-center justify-between">
+          <NuxtLink to="/" class="text-lg font-semibold text-white">Tarot Deck</NuxtLink>
+          <nav class="flex items-center gap-2">
+            <NuxtLink to="/deck" class="btn-ghost px-3 py-1.5">Deck</NuxtLink>
+            <NuxtLink to="/spreads" class="btn-ghost px-3 py-1.5">Spreads</NuxtLink>
+          </nav>
+        </div>
       </div>
     </header>
 

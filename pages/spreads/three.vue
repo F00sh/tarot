@@ -1,18 +1,18 @@
 <template>
   <div class="max-w-none mx-auto px-4 py-8 w-full">
     <div class="max-w-6xl mx-auto">
-      <h1 class="text-2xl font-semibold">Three-Card Spread</h1>
-      <p class="text-gray-300 mt-1">How many cards: 3 • Positions: Past • Present • Future.</p>
+      <h1 class="text-2xl font-semibold text-center">Three-Card Spread</h1>
+      <p class="text-gray-300 mt-1 text-center">How many cards: 3 • Positions: Past • Present • Future.</p>
 
-      <div class="mt-4 flex items-center gap-3">
-        <button @click="draw" class="px-4 py-2 rounded bg-yellow-500 text-black font-medium hover:bg-yellow-400">Draw</button>
-        <button @click="reset" class="px-4 py-2 rounded bg-gray-700 hover:bg-gray-600">Reset</button>
+      <div class="mt-4 flex items-center justify-center gap-3">
+        <button @click="draw" class="btn-warn">Draw</button>
+        <button @click="reset" class="btn-muted">Reset</button>
       </div>
 
       <!-- Unified layout: responsive 3-up grid with spacing -->
       <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
         <div v-for="(c, i) in cards" :key="i" class="flex flex-col items-center text-center">
-          <div class="mb-2 inline-block bg-black/60 text-gray-100 text-sm px-2 py-1 rounded">
+          <div class="mb-2 chip">
             <span class="font-semibold">{{ positions[i] }}</span>
             <template v-if="c"> — {{ c.name }} <span class="text-gray-300">({{ c.isReversed ? 'Reversed' : 'Upright' }})</span></template>
           </div>
@@ -49,4 +49,3 @@ const promptCards = computed(() => cards.value.map((c: any) => ({
 provide('cardClear', true)
 provide('cardSize', 'lg')
 </script>
-

@@ -1,13 +1,13 @@
 <template>
   <div v-if="open" class="fixed inset-0 z-[100]">
     <div class="absolute inset-0 bg-black/70" @click="emit('close')"></div>
-    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(96vw,1100px)] max-h-[88vh] overflow-hidden rounded-xl border border-purple-900/60 bg-[#0a0910] text-gray-200 shadow-2xl">
-      <div class="p-3 border-b border-purple-900/60 flex items-center justify-between">
+    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(96vw,1100px)] max-h-[88vh] overflow-hidden rounded-xl glass text-gray-200 shadow-2xl">
+      <div class="p-3 border-b border-white/15 flex items-center justify-between">
         <h3 class="text-lg font-semibold">{{ card?.name }}</h3>
         <div class="flex items-center gap-2">
-          <button @click="emit('prev')" class="px-2 py-1 text-xs rounded border border-purple-900/60 hover:bg-purple-900/20">Prev</button>
-          <button @click="emit('next')" class="px-2 py-1 text-xs rounded border border-purple-900/60 hover:bg-purple-900/20">Next</button>
-          <button @click="emit('close')" class="px-2 py-1 text-xs rounded border border-purple-900/60 hover:bg-purple-900/20">Close</button>
+          <button @click="emit('prev')" class="btn-muted px-3 py-1">Prev</button>
+          <button @click="emit('next')" class="btn-muted px-3 py-1">Next</button>
+          <button @click="emit('close')" class="btn-primary px-3 py-1">Close</button>
         </div>
       </div>
       <div class="p-5 flex flex-col sm:flex-row gap-8">

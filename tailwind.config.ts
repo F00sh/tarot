@@ -11,6 +11,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Montserrat', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Roboto', 'Inter', 'Helvetica Neue', 'Arial', 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji']
+      },
       colors: {
         tarot: {
           bg: '#0a0910',

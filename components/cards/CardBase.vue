@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative bg-tarot-card rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-[1.02] cursor-pointer select-none border border-purple-900/60"
+    class="relative rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-[1.02] cursor-pointer select-none border border-white/15 bg-black/50 backdrop-blur"
     :class="[sizeClass, { 'z-[80] ring-2 ring-tarot-accent': bringToFront }, 'z-10']"
     @click="toggleOverlay"
   >
@@ -30,7 +30,7 @@
     <!-- Close button when overlay open -->
     <button
       v-if="overlayOpen"
-      class="absolute top-2 right-2 z-[96] px-2 py-1 text-xs rounded border border-purple-900/60 bg-black/60 hover:bg-black/80"
+      class="absolute top-2 right-2 z-[96] px-2 py-1 text-xs rounded border border-white/20 bg-black/40 hover:bg-black/60 backdrop-blur"
       @click.stop="overlayOpen = false"
       aria-label="Close"
     >
@@ -131,4 +131,3 @@ watch(() => props.imageBase, () => {
 .animate-card-overlay { animation: cardOverlayIn 180ms ease-out both; }
 .animate-card-text { animation: cardTextIn 220ms ease-out both; }
 </style>
-

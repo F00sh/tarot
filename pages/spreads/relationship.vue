@@ -1,12 +1,12 @@
 <template>
   <div class="max-w-none mx-auto px-4 py-8 w-full overflow-hidden">
     <div class="max-w-6xl mx-auto">
-      <h1 class="text-2xl font-semibold">Relationship Spread</h1>
-      <p class="text-gray-300 mt-1">How many cards: 6 • You • Them • Relationship now • Challenges • Strengths • Future potential.</p>
+      <h1 class="text-2xl font-semibold text-center">Relationship Spread</h1>
+      <p class="text-gray-300 mt-1 text-center">How many cards: 6 • You • Them • Relationship now • Challenges • Strengths • Future potential.</p>
 
-      <div class="mt-4 flex items-center gap-3">
-        <button @click="draw" class="px-4 py-2 rounded bg-yellow-500 text-black font-medium hover:bg-yellow-400">Draw</button>
-        <button @click="reset" class="px-4 py-2 rounded bg-gray-700 hover:bg-gray-600">Reset</button>
+      <div class="mt-4 flex items-center justify-center gap-3">
+        <button @click="draw" class="btn-warn">Draw</button>
+        <button @click="reset" class="btn-muted">Reset</button>
       </div>
 
       <!-- Mobile column list -->
@@ -63,22 +63,22 @@
 
         <!-- Separate captions outside card space -->
         <div class="absolute z-20 pointer-events-none" style="left: 60px; top: 10px;">
-          <div class="inline-block bg-black/70 text-gray-100 text-xs px-2 py-0.5 rounded">1. {{ positions[0] }}</div>
+          <div class="chip">1. {{ positions[0] }}</div>
         </div>
         <div class="absolute z-20 pointer-events-none" style="left: 380px; top: 10px;">
-          <div class="inline-block bg-black/70 text-gray-100 text-xs px-2 py-0.5 rounded">3. {{ positions[2] }}</div>
+          <div class="chip">3. {{ positions[2] }}</div>
         </div>
         <div class="absolute z-20 pointer-events-none" style="left: 700px; top: 10px;">
-          <div class="inline-block bg-black/70 text-gray-100 text-xs px-2 py-0.5 rounded">2. {{ positions[1] }}</div>
+          <div class="chip">2. {{ positions[1] }}</div>
         </div>
         <div class="absolute z-20 pointer-events-none" style="left: 160px; top: 240px;">
-          <div class="inline-block bg-black/70 text-gray-100 text-xs px-2 py-0.5 rounded">4. {{ positions[3] }}</div>
+          <div class="chip">4. {{ positions[3] }}</div>
         </div>
         <div class="absolute z-20 pointer-events-none" style="left: 640px; top: 240px;">
-          <div class="inline-block bg-black/70 text-gray-100 text-xs px-2 py-0.5 rounded">5. {{ positions[4] }}</div>
+          <div class="chip">5. {{ positions[4] }}</div>
         </div>
         <div class="absolute z-20 pointer-events-none" style="left: 380px; top: 430px;">
-          <div class="inline-block bg-black/70 text-gray-100 text-xs px-2 py-0.5 rounded">6. {{ positions[5] }}</div>
+          <div class="chip">6. {{ positions[5] }}</div>
         </div>
         </div>
         </SpreadScaler>
@@ -112,4 +112,3 @@ const promptCards = computed(() => cards.value.map((c: any) => ({
 provide('cardClear', true)
 provide('cardSize', 'md')
 </script>
-

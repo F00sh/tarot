@@ -2,7 +2,7 @@
   <div>
     <!-- Centered toggle button: bottom on mobile, above cards on desktop -->
     <button
-      class="fixed z-[70] left-1/2 -translate-x-1/2 bottom-4 md:top-20 md:bottom-auto px-4 py-2 rounded bg-tarot-accent text-white text-sm font-medium shadow-lg hover:opacity-90"
+      class="fixed z-[70] left-1/2 -translate-x-1/2 bottom-4 md:top-24 md:bottom-auto btn-primary shadow-lg"
       @click="open = true"
     >
       Reading

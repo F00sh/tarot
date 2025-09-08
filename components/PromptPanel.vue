@@ -1,18 +1,18 @@
 <template>
-  <div class="mt-3 p-2 sm:p-3 rounded border border-purple-900/60 bg-black/40 w-full">
+  <div class="mt-3 p-2 sm:p-3 panel w-full">
     <div class="flex flex-wrap items-center justify-between gap-2">
       <h2 class="text-base font-semibold text-gray-200">ChatGPT Prompt</h2>
       <div class="flex flex-wrap items-center gap-2">
-        <button @click="copyPrompt" class="px-2 py-1 rounded bg-emerald-500 text-black text-xs font-medium hover:bg-emerald-400">Copy</button>
-        <button @click="openChatGPT" class="px-2 py-1 rounded bg-tarot-accent text-white text-xs font-medium hover:opacity-90">Open</button>
+        <button @click="copyPrompt" class="btn-emerald px-3 py-1">Copy</button>
+        <button @click="openChatGPT" class="btn-primary px-3 py-1">Open</button>
         <span v-if="copied" class="text-[11px] text-gray-400">Copied!</span>
-        <button @click="collapsed = !collapsed" class="px-2 py-1 rounded border border-purple-900/60 text-xs text-gray-200 hover:bg-purple-900/20">{{ collapsed ? 'Show' : 'Hide' }}</button>
+        <button @click="collapsed = !collapsed" class="btn-muted px-3 py-1">{{ collapsed ? 'Show' : 'Hide' }}</button>
       </div>
     </div>
 
     <div v-show="!collapsed" class="mt-2 grid grid-cols-1 gap-2">
-      <textarea v-model="question" rows="2" class="w-full px-2 py-1.5 rounded bg-black/60 border border-purple-900/60 text-gray-200 placeholder:text-gray-500 text-sm" :placeholder="placeholder"></textarea>
-      <textarea :value="prompt" readonly rows="4" class="w-full px-2 py-1.5 rounded bg-black/60 border border-purple-900/60 font-mono text-[11px] text-gray-200 whitespace-pre-wrap break-words max-h-40 overflow-auto"></textarea>
+      <textarea v-model="question" rows="2" class="w-full px-2 py-1.5 rounded bg-white/10 border border-white/20 text-gray-100 placeholder:text-gray-400 text-sm backdrop-blur" :placeholder="placeholder"></textarea>
+      <textarea :value="prompt" readonly rows="4" class="w-full px-2 py-1.5 rounded bg-white/10 border border-white/20 font-mono text-[11px] text-gray-100 whitespace-pre-wrap break-words max-h-40 overflow-auto backdrop-blur"></textarea>
     </div>
   </div>
 </template>
@@ -74,4 +74,3 @@ function openChatGPT() {
 
 const placeholder = computed(() => props.placeholder || 'What guidance do these cards offer about ...?')
 </script>
-

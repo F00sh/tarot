@@ -1,16 +1,16 @@
 <template>
   <div class="max-w-6xl mx-auto px-4 py-8 w-full overflow-hidden md:grid md:grid-cols-12 md:gap-6">
     <div class="md:col-span-8">
-      <h1 class="text-3xl font-semibold mb-6">Tarot Deck</h1>
+      <h1 class="text-3xl font-semibold mb-6 text-center md:text-left">Tarot Deck</h1>
 
-    <div class="flex flex-wrap items-center gap-3">
-      <button @click="onShuffle" class="px-4 py-2 rounded bg-yellow-500 text-black font-medium hover:bg-yellow-400">Shuffle</button>
-      <button @click="onCut" class="px-4 py-2 rounded bg-gray-700 hover:bg-gray-600">Cut</button>
+    <div class="flex flex-wrap items-center gap-3 justify-center md:justify-start">
+      <button @click="onShuffle" class="btn-warn">Shuffle</button>
+      <button @click="onCut" class="btn-muted">Cut</button>
       <div class="flex items-center gap-2">
         <label for="dealCount" class="text-sm text-gray-300">Deal</label>
-        <input id="dealCount" type="number" v-model.number="dealCount" min="1" class="w-20 px-2 py-1 rounded bg-gray-800 border border-gray-700" />
-        <button @click="onDeal" class="px-3 py-1.5 rounded bg-indigo-500 text-white hover:bg-indigo-400">Deal</button>
-        <button @click="onReset" class="px-3 py-1.5 rounded bg-gray-700 hover:bg-gray-600">Reset</button>
+        <input id="dealCount" type="number" v-model.number="dealCount" min="1" class="w-20 px-2 py-1 rounded bg-white/10 border border-white/20" />
+        <button @click="onDeal" class="btn-primary">Deal</button>
+        <button @click="onReset" class="btn-muted">Reset</button>
       </div>
     </div>
 
@@ -24,7 +24,7 @@
     </div>
     </div>
     <aside class="hidden md:block md:col-span-4 pt-4">
-      <div class="sticky top-24">
+      <div class="sticky top-24 panel">
         <PromptPanel v-if="dealt.length" :cards="promptCards" spread="Free Draw" />
       </div>
     </aside>

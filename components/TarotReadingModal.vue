@@ -4,14 +4,14 @@
     <div
       role="dialog"
       aria-modal="true"
-      class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(96vw,640px)] max-h-[85vh] overflow-hidden rounded-2xl border border-purple-500/60 bg-black text-gray-100 shadow-2xl"
+      class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(96vw,640px)] max-h-[85vh] overflow-hidden rounded-2xl glass text-gray-100 shadow-2xl"
     >
       <!-- Header -->
-      <div class="px-4 py-3 border-b border-purple-800/60 flex items-center justify-between">
+      <div class="px-4 py-3 border-b border-white/15 flex items-center justify-between">
         <h3 class="text-lg font-semibold">Tarot Reading</h3>
         <button
           aria-label="Close"
-          class="p-1.5 rounded-md border border-transparent hover:border-purple-500/60 hover:bg-purple-900/20 text-xl leading-none"
+          class="p-1.5 rounded-md border border-white/20 hover:bg-white/10 text-xl leading-none"
           @click="onCloseClick"
         >
           ×
@@ -50,7 +50,7 @@
             v-model="userInput"
             rows="6"
             placeholder="Ask a specific question for the reading..."
-            class="w-full p-3 rounded-md bg-black placeholder:text-gray-500 border border-purple-500/60 focus:outline-none focus:ring-2 focus:ring-purple-500/60"
+            class="w-full p-3 rounded-md bg-white/10 placeholder:text-gray-400 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/30 backdrop-blur"
           />
         </div>
 
@@ -58,16 +58,8 @@
         <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
           <div class="text-xs text-gray-400">Hidden prompt: {{ selectedLabel }}</div>
           <div class="flex items-center gap-3">
-            <button
-              type="button"
-              class="px-4 py-2 rounded-full border border-purple-500/70 hover:bg-purple-900/30 hover:border-purple-400 transition-colors"
-              @click="handleCopy"
-            >Copy</button>
-            <button
-              type="button"
-              class="px-4 py-2 rounded-full border border-purple-500/70 hover:bg-purple-900/30 hover:border-purple-400 transition-colors"
-              @click="openChatGPT"
-            >ChatGPT</button>
+            <button type="button" class="btn-muted" @click="handleCopy">Copy</button>
+            <button type="button" class="btn-primary" @click="openChatGPT">ChatGPT</button>
           </div>
         </div>
       </div>
