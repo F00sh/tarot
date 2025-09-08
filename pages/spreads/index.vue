@@ -7,37 +7,45 @@
       <li class="panel">
         <div class="text-lg font-medium">🔮 Single Card Draw</div>
         <div class="text-sm text-gray-400">1 card • Quick daily guidance or yes/no</div>
-        <NuxtLink to="/spreads/single" class="inline-block mt-3 btn-primary">Open</NuxtLink>
+        <div class="mt-3 flex gap-2 flex-wrap">
+          <NuxtLink to="/spreads/single" class="btn-primary">Fast</NuxtLink>
+        </div>
       </li>
+
       <li class="panel">
         <div class="text-lg font-medium">🔮 Three-Card Spread</div>
         <div class="text-sm text-gray-400">3 cards • Past • Present • Future</div>
-        <NuxtLink to="/spreads/three" class="inline-block mt-3 btn-primary">Open</NuxtLink>
+        <div class="mt-3 flex gap-2 flex-wrap">
+          <NuxtLink to="/spreads/three" class="btn-primary">Fast</NuxtLink>
+          <NuxtLink to="/spreads/three-extended" class="btn-muted">Extended</NuxtLink>
+        </div>
       </li>
+
       <li class="panel">
         <div class="text-lg font-medium">🔮 Celtic Cross</div>
         <div class="text-sm text-gray-400">10 cards • Full reading</div>
-        <NuxtLink to="/spreads/celtic-cross" class="inline-block mt-3 btn-primary">Open</NuxtLink>
+        <div class="mt-3 flex gap-2 flex-wrap">
+          <NuxtLink to="/spreads/celtic-cross" class="btn-primary">Fast</NuxtLink>
+          <NuxtLink to="/spreads/celtic-cross-extended" class="btn-muted">Extended</NuxtLink>
+        </div>
       </li>
+
       <li class="panel">
         <div class="text-lg font-medium">🔮 Relationship Spread</div>
         <div class="text-sm text-gray-400">6 cards • Dynamics and outlook</div>
-        <NuxtLink to="/spreads/relationship" class="inline-block mt-3 btn-primary">Open</NuxtLink>
+        <div class="mt-3 flex gap-2 flex-wrap">
+          <NuxtLink to="/spreads/relationship" class="btn-primary">Fast</NuxtLink>
+          <NuxtLink to="/spreads/relationship-extended" class="btn-muted">Extended</NuxtLink>
+        </div>
       </li>
-      <li class="panel">
-        <div class="text-lg font-medium">🔮 Celtic Cross — Extended</div>
-        <div class="text-sm text-gray-400">10 cards • Draw one by one with optional pre-draw shuffle/cut.</div>
-        <NuxtLink to="/spreads/celtic-cross-extended" class="inline-block mt-3 btn-primary">Open</NuxtLink>
-      </li>
-      <li class="panel">
-        <div class="text-lg font-medium">🔮 Relationship — Extended</div>
-        <div class="text-sm text-gray-400">6 cards • Draw one by one with optional pre-draw shuffle/cut.</div>
-        <NuxtLink to="/spreads/relationship-extended" class="inline-block mt-3 btn-primary">Open</NuxtLink>
-      </li>
+
       <li class="panel md:col-span-2">
         <div class="text-lg font-medium">🔮 Year Ahead</div>
         <div class="text-sm text-gray-400">12 cards • Monthly forecast</div>
-        <NuxtLink to="/spreads/year-ahead" class="inline-block mt-3 btn-primary">Open</NuxtLink>
+        <div class="mt-3 flex gap-2 flex-wrap">
+          <NuxtLink to="/spreads/year-ahead" class="btn-primary">Fast</NuxtLink>
+          <NuxtLink to="/spreads/year-ahead-extended" class="btn-muted">Extended</NuxtLink>
+        </div>
       </li>
     </ul>
   </div>
